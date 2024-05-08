@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/Avatar.css";
 
 function ReadyPlayerMeComponent() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const frame = document.getElementById("frame");
 
@@ -29,7 +31,7 @@ function ReadyPlayerMeComponent() {
       if (json.eventName === "v1.avatar.exported") {
         console.log(`Avatar URL: ${json.data.url}`);
         localStorage.setItem("avatarUrl", json.data.url);
-        history.push("/Overview"); // Navigate to the Overview route
+        navigate("/Overview");
       }
 
       // Get user id

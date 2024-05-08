@@ -1,0 +1,19 @@
+.body,
+.Overview_container {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  height: 5000px;
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+canvas {
+  margin: 10% 0% 0% 0%;
+  width: 100vw;
+  height: 80vh;
+}
