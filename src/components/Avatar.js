@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../styles/Avatar.css";
 
 function ReadyPlayerMeComponent() {
@@ -28,7 +29,7 @@ function ReadyPlayerMeComponent() {
       if (json.eventName === "v1.avatar.exported") {
         console.log(`Avatar URL: ${json.data.url}`);
         localStorage.setItem("avatarUrl", json.data.url);
-        window.location.href = "./jungle.html";
+        history.push("/Overview"); // Navigate to the Overview route
       }
 
       // Get user id

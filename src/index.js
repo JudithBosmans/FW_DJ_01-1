@@ -7,6 +7,7 @@ import ErrorPage from "./error_page";
 
 import App from "./components/App";
 import Avatar from "./components/Avatar.js";
+import Overview from "./components/Overview.js";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/Avatar",
+    element: <Avatar />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Overview",
     element: <Avatar />,
     errorElement: <ErrorPage />,
   },
