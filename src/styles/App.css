@@ -1,6 +1,69 @@
-/* MOBILE DEVICES */
+/************* 
+MOBILE DEVICES 
+*************/
 
-.Jungle_01 {
-  width: 20%;
-  /* overflow: hidden; */
+.parallax_container {
+  background-image: url("../pics/01/General_background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.text {
+  color: white;
+  font-weight: 700;
+  font-size: 40px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  margin: -105% 0% 0% 0%;
+}
+
+.logo img {
+  margin: -250% 0% 0% 0%;
+  width: 75%;
+}
+
+/* 01 JUNGLE */
+
+.Jungle_temple {
+  margin: 70% 0% 0% 0%;
+}
+
+.Jungle_tiger img {
+  margin: 140% 0% 0% 0%;
+  width: 100%;
+}
+
+/* 02 ICE */
+
+.Ice_cubes_01 {
+  margin: -27% 0% 0% -27%;
+}
+
+.Ice_cubes_02 {
+  margin: -33% 0% 0% 30%;
+}
+
+.Ice_cubes_03 {
+  margin: 140% 0% 0% 24%;
+}
+
+.Ice_Crystals {
+  opacity: 80%;
+  margin: 100% 0% 0% 0%;
+}
+
+/* 03 SNOW */
+
+.Snow_background {
+  margin: -55% 0% 0% 0%;
+}
+
+.Snow_tree {
+  margin: -80% 0% 0% -20%;
+}
+
+.Snow_tree_02 {
+  margin: -270% 0% 0% 50%;
 }
