@@ -1,8 +1,14 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { useSpring, animated } from "react-spring";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import Typewriter from "typewriter-effect";
-
 import "../styles/App.css";
+
+///////////////
+// IMPPORTS //
+/////////////
 
 //GENERAL
 import logo from "../pics/Dr.Jart+_white_logo.png";
@@ -25,39 +31,39 @@ import Snow_01 from "../pics/03/03_Snow_Background.png";
 import Snow_02 from "../pics/03/03_Trees_01.png";
 
 const App = () => {
-  const ref = useRef();
+  const alignCenter = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   return (
-    <Parallax pages={2} ref={ref} className="parallax_container">
+    <Parallax pages={2} className="parallax_container">
       {/************* 
     ***************
       01 JUNGLE 
     ***************
     *************/}
-
       <ParallaxLayer
+        // sticky={{ start: 0, end: 4 }}
         offset={0}
         speed={2}
         factor={2}
         className="logo"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 10,
         }}
       >
-        <img src={logo} alt="Logo" />
+        <animated.img src={logo} alt="Logo" />
       </ParallaxLayer>
-
       <ParallaxLayer
         offset={0}
         speed={2}
-        factor={2}
+        factor={1}
         className="text"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 11,
         }}
       >
@@ -74,6 +80,20 @@ const App = () => {
         offset={0}
         speed={1}
         factor={1}
+        className="Jungle_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
+      </ParallaxLayer>
+
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
         className="Jungle_background"
         style={{
           border: "none",
@@ -83,7 +103,6 @@ const App = () => {
           zIndex: 0,
         }}
       />
-
       <ParallaxLayer
         offset={0}
         speed={1}
@@ -96,16 +115,13 @@ const App = () => {
           zIndex: 1,
         }}
       />
-
       <ParallaxLayer
         offset={0}
         speed={3}
         factor={1}
         className="Jungle_Forrest"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 7,
         }}
       >
@@ -119,32 +135,28 @@ const App = () => {
         className="Jungle_temple"
         style={{
           border: "none",
-          backgroundImage: `url(${Jungle_02})`,
-          zIndex: 7,
+          zIndex: 10,
         }}
-      />
-
+      >
+        <img src={Jungle_02} alt="Tiger" />
+      </ParallaxLayer>
       <ParallaxLayer
         offset={0}
         speed={3}
         factor={2}
         className="Jungle_tiger"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 8,
         }}
       >
         <img src={Jungle_03} alt="Tiger" />
       </ParallaxLayer>
-
       {/************* 
     ***************
         02 ICE
     ***************
     *************/}
-
       <ParallaxLayer
         offset={0.9}
         speed={1}
@@ -159,6 +171,20 @@ const App = () => {
       />
 
       <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Ice_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD FILLED WITH THE NEWEST TECHNOLOGIES</h1>
+      </ParallaxLayer>
+
+      <ParallaxLayer
         offset={0.9}
         speed={2}
         factor={1}
@@ -170,57 +196,61 @@ const App = () => {
           zIndex: 1,
         }}
       />
-
       <ParallaxLayer
         offset={0.9}
         speed={3}
         factor={2}
         className="Ice_cubes_01"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 10,
         }}
       >
         <img src={Ice_01} alt="Cubes_01" />
       </ParallaxLayer>
-
       <ParallaxLayer
         offset={0.9}
         speed={3}
         factor={2}
         className="Ice_cubes_02"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 10,
         }}
       >
         <img src={Ice_02} alt="Cubes_02" />
       </ParallaxLayer>
-
       <ParallaxLayer
         offset={0.9}
         speed={3}
         factor={2}
         className="Ice_cubes_03"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 10,
         }}
       >
         <img src={Ice_03} alt="Cubes_03" />
       </ParallaxLayer>
-
       {/************* 
     ***************
         03 SNOW 
     ***************
     *************/}
+
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Snow_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
+      </ParallaxLayer>
 
       <ParallaxLayer
         offset={1}
@@ -254,9 +284,7 @@ const App = () => {
         factor={2}
         className="Snow_tree"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 8,
         }}
       >
@@ -269,15 +297,25 @@ const App = () => {
         factor={2}
         className="Snow_tree_02"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          ...alignCenter,
           zIndex: 8,
         }}
       >
         <img src={Snow_02} alt="Snow_tree_02" />
       </ParallaxLayer>
 
+      <ParallaxLayer
+        offset={1}
+        speed={3}
+        factor={2}
+        style={{ zIndex: 10, ...alignCenter }}
+      >
+        <Link to="/Avatar">
+          <div className="Snow_button">
+            <p>Avatar</p>
+          </div>
+        </Link>
+      </ParallaxLayer>
       {/* <ParallaxLayer sticky={{ start: 1, end: 2 }} /> */}
     </Parallax>
   );
