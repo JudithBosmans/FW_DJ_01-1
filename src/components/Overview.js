@@ -1,65 +1,340 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+import { animated } from "react-spring";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import Typewriter from "typewriter-effect";
 import "../styles/Overview.css";
 
-const Overview = () => {
-  const ref = useRef(null);
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+///////////////
+// IMPPORTS //
+/////////////
+
+//GENERAL
+import logo from "../pics/Dr.Jart+_white_logo.png";
+
+//01 JUNGLE
+import Jungle_00 from "../pics/01/03_Background.png";
+import Jungle_01 from "../pics/01/01_Jungle_Back.png";
+import Jungle_02 from "../pics/01/02_Jungle_Back_02.png";
+import Jungle_03 from "../pics/01/04_tiger.png";
+
+//02 ICE
+import Ice_00 from "../pics/02/Ice_background.png";
+import Ice_01 from "../pics/02/Ice_blocks_01.png";
+import Ice_02 from "../pics/02/Ice_blocks_02.png";
+import Ice_03 from "../pics/02/Ice_blocks_03.png";
+import Ice_04 from "../pics/02/Ice_crystals_04.png";
+
+//03 SNOW
+import Snow_01 from "../pics/03/03_Snow_Background.png";
+import Snow_02 from "../pics/03/03_Trees_01.png";
+
+const Overview = ({ modelUrl }) => {
+  const mountRef = useRef(null);
 
   useEffect(() => {
-    const loadedImages = new Array(100);
-    let imagesLoaded = 0;
+    if (!mountRef.current) return;
 
-    for (let i = 1; i <= 100; i++) {
-      const img = new Image();
-      img.onload = () => {
-        loadedImages[i - 1] = img;
-        imagesLoaded++;
-        console.log(`Loaded image ${i}`);
-        if (imagesLoaded === 100) {
-          setImages(loadedImages);
-          setLoading(false);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mountRef.current.appendChild(renderer.domElement);
+
+    const loader = new GLTFLoader();
+
+    const avatarUrl = localStorage.getItem("avatarUrl");
+    console.log("Avatar URL:", avatarUrl); // Ensure this is not undefined
+
+    if (avatarUrl) {
+      loader.load(
+        avatarUrl,
+        (gltf) => {
+          scene.add(gltf.scene);
+          camera.position.z = 5;
+          const animate = () => {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+          };
+          animate();
+        },
+        undefined,
+        function (error) {
+          console.error("Error loading GLTF:", error);
         }
-      };
-      img.onerror = () => {
-        console.error(`Failed to load image ${i}`);
-      };
-      img.src = `/assets/cera/${i}.webp`;
+      );
+    } else {
+      console.error("No avatar URL found in localStorage");
     }
+
+    return () => {
+      mountRef.current.removeChild(renderer.domElement);
+    };
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["center end", "start start"],
-  });
-
-  const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 99]);
-
-  const render = useCallback(
-    (index) => {
-      const canvas = ref.current;
-      const ctx = canvas?.getContext("2d");
-      if (ctx && images[index]) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(images[index], 0, 0);
-      }
-    },
-    [images]
-  );
-
-  useMotionValueEvent(currentIndex, "change", (latest) => {
-    render(Math.floor(latest));
-  });
-
-  if (loading) {
-    return <div>Loading images...</div>;
-  }
+  const alignCenter = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
   return (
-    <div className="Overview_container">
-      <canvas ref={ref} width="800" height="600"></canvas>
-    </div>
+    <Parallax pages={2.1} className="parallax_container">
+      <ParallaxLayer offset={0} speed={1} factor={1} className="Avatar">
+        <div
+          ref={mountRef}
+          style={{ width: "100%", height: "100vh", zIndex: 50 }}
+        />
+      </ParallaxLayer>
+      {/************* 
+    ***************
+      01 JUNGLE 
+    ***************
+    *************/}
+      <ParallaxLayer
+        offset={0}
+        speed={2}
+        factor={2}
+        className="logo"
+        style={{
+          ...alignCenter,
+          zIndex: 10,
+        }}
+      >
+        <animated.img src={logo} alt="Logo" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0}
+        speed={2}
+        factor={1}
+        className="text"
+        style={{
+          ...alignCenter,
+          zIndex: 11,
+        }}
+      >
+        <Typewriter
+          options={{
+            strings: ["Skin.", "Science.", "Art."],
+            autoStart: true,
+            loop: true,
+          }}
+        />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Jungle_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Jungle_background"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Jungle_00})`,
+          backgroundSize: `cover`,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 0,
+        }}
+      />
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Jungle_Forrest"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Jungle_01})`,
+          backgroundSize: `cover`,
+          zIndex: 1,
+        }}
+      />
+      <ParallaxLayer
+        offset={0}
+        speed={3}
+        factor={1}
+        className="Jungle_Forrest"
+        style={{
+          ...alignCenter,
+          zIndex: 7,
+        }}
+      >
+        <img src={Jungle_01} alt="Jungle_background" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0}
+        speed={2}
+        factor={2}
+        className="Jungle_temple"
+        style={{
+          border: "none",
+          zIndex: 8,
+        }}
+      >
+        <img src={Jungle_02} alt="Tiger" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0}
+        speed={3}
+        factor={2}
+        className="Jungle_tiger"
+        style={{
+          ...alignCenter,
+          zIndex: 8,
+        }}
+      >
+        <img src={Jungle_03} alt="Tiger" />
+      </ParallaxLayer>
+      {/************* 
+    ***************
+        02 ICE
+    ***************
+    *************/}
+      <ParallaxLayer
+        offset={0.9}
+        speed={1}
+        factor={1.3}
+        className="Ice_background"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Ice_00})`,
+          backgroundSize: `cover`,
+          zIndex: 1,
+        }}
+      />
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Ice_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD FILLED WITH THE NEWEST TECHNOLOGIES</h1>
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0.9}
+        speed={2}
+        factor={1}
+        className="Ice_Crystals"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Ice_04})`,
+          backgroundSize: `cover`,
+          zIndex: 1,
+        }}
+      />
+      <ParallaxLayer
+        offset={0.9}
+        speed={3}
+        factor={2}
+        className="Ice_cubes_01"
+        style={{
+          ...alignCenter,
+          zIndex: 10,
+        }}
+      >
+        <img src={Ice_01} alt="Cubes_01" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0.9}
+        speed={3}
+        factor={2}
+        className="Ice_cubes_02"
+        style={{
+          ...alignCenter,
+          zIndex: 10,
+        }}
+      >
+        <img src={Ice_02} alt="Cubes_02" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={0.9}
+        speed={3}
+        factor={2}
+        className="Ice_cubes_03"
+        style={{
+          ...alignCenter,
+          zIndex: 10,
+        }}
+      >
+        <img src={Ice_03} alt="Cubes_03" />
+      </ParallaxLayer>
+      {/************* 
+    ***************
+        03 SNOW 
+    ***************
+    *************/}
+      <ParallaxLayer
+        offset={0}
+        speed={1}
+        factor={1}
+        className="Snow_text"
+        style={{
+          ...alignCenter,
+          backgroundRepeat: `no-repeat`,
+          zIndex: 10,
+        }}
+      >
+        <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={1}
+        speed={1}
+        factor={1.5}
+        className="Snow_background_02"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Snow_01})`,
+          backgroundSize: `cover`,
+          zIndex: 0,
+        }}
+      />
+      <ParallaxLayer
+        offset={1}
+        speed={2}
+        factor={2}
+        className="Snow_tree"
+        style={{
+          ...alignCenter,
+          zIndex: 8,
+        }}
+      >
+        <img src={Snow_02} alt="Snow_tree" />
+      </ParallaxLayer>
+      <ParallaxLayer
+        offset={1}
+        speed={3}
+        factor={2}
+        className="Snow_tree_02"
+        style={{
+          ...alignCenter,
+          zIndex: 8,
+        }}
+      >
+        <img src={Snow_02} alt="Snow_tree_02" />
+      </ParallaxLayer>
+    </Parallax>
   );
 };
 

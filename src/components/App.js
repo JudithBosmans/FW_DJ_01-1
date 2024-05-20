@@ -135,7 +135,7 @@ const App = () => {
         className="Jungle_temple"
         style={{
           border: "none",
-          zIndex: 10,
+          zIndex: 8,
         }}
       >
         <img src={Jungle_02} alt="Tiger" />
@@ -160,7 +160,7 @@ const App = () => {
       <ParallaxLayer
         offset={0.9}
         speed={1}
-        factor={1}
+        factor={1.5}
         className="Ice_background"
         style={{
           border: "none",
@@ -251,19 +251,6 @@ const App = () => {
       >
         <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
       </ParallaxLayer>
-
-      <ParallaxLayer
-        offset={1}
-        speed={1}
-        factor={1}
-        className="Snow_background"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Snow_01})`,
-          backgroundSize: `cover`,
-          zIndex: 0,
-        }}
-      />
 
       <ParallaxLayer
         offset={1}

@@ -31,7 +31,7 @@ function ReadyPlayerMeComponent() {
       if (json.eventName === "v1.avatar.exported") {
         console.log(`Avatar URL: ${json.data.url}`);
         localStorage.setItem("avatarUrl", json.data.url);
-        navigate("/Overview");
+        navigate("/Test");
       }
 
       // Get user id
@@ -53,12 +53,11 @@ function ReadyPlayerMeComponent() {
     window.addEventListener("message", subscribe);
     document.addEventListener("message", subscribe);
 
-    // Cleanup function to remove the event listeners when the component unmounts
     return () => {
       window.removeEventListener("message", subscribe);
       document.removeEventListener("message", subscribe);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+  }, []);
 
   return (
     <iframe

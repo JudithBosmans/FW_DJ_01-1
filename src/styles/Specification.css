@@ -1,0 +1,15 @@
+.Overview_container {
+  margin: 0;
+  padding: 0;
+  height: 200vh;
+
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.canvasStyle {
+  display: block;
+  margin: 0 auto;
+}
