@@ -80,10 +80,9 @@ const Specification = () => {
       style={{ height: "5000px", overflow: "auto" }}
     >
       <div>
-        <h1>{tab.label}</h1>
+        <h1>{tab.name}</h1>
         <p>{tab.text}</p>
         {tab.productShot && <img src={tab.productShot} alt={tab.label} />}
-        {/* Render more content based on tab data */}
       </div>
       <canvas
         ref={ref}

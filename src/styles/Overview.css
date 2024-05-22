@@ -5,11 +5,12 @@ html {
 }
 
 h1,
-.text {
-  color: white;
+.text,
+p {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/************* 
+/*************
 MOBILE DEVICES - SMARTPHONES
 *************/
 
@@ -27,12 +28,20 @@ MOBILE DEVICES - SMARTPHONES
   margin: 100% 10% 10% 10%;
 }
 
-.logo img {
-  margin: -100% 0% 0% 0%;
-  width: 60%;
+.logo-layer {
+  z-index: 11;
+  top: 0;
+  margin: -70% 0% 0% 0%;
 }
 
-/* 01 JUNGLE */
+.logo-img {
+  width: 30%;
+  margin: 0 auto;
+}
+
+/*************
+01 - JUNGLE - MOBILE
+*************/
 
 .Jungle_temple {
   margin: 70% 0% 0% 0%;
@@ -43,7 +52,9 @@ MOBILE DEVICES - SMARTPHONES
   width: 100%;
 }
 
-/* 02 ICE */
+/*************
+02 - ICE - MOBILE
+*************/
 
 .Ice_text h1 {
   margin: 370% 10% 10% 10%;
@@ -67,18 +78,17 @@ MOBILE DEVICES - SMARTPHONES
 .Ice_Crystals {
   opacity: 80%;
   margin: 100% 0% 0% 0%;
+  height: 70vh;
 }
 
-/* 03 SNOW */
+/*************
+03 - SNOW - MOBILE
+*************/
 
 .Snow_text h1 {
   margin: 700% 10% 10% 10%;
   font-weight: 1000;
   font-size: 20px;
-}
-
-.Snow_background {
-  margin: -55% 0% 0% 0%;
 }
 
 .Snow_tree {
@@ -88,7 +98,7 @@ MOBILE DEVICES - SMARTPHONES
 .Snow_tree_02 {
   margin: -270% 0% 0% 50%;
 }
-
+/* 
 .Snow_button p {
   margin: 0% 0% 200% 0%;
   padding: 5px 10px 5px 10px;
@@ -100,12 +110,14 @@ MOBILE DEVICES - SMARTPHONES
   color: black;
   border: none;
   cursor: pointer;
-}
+} */
 
-/* 04 SELECT */
+/*************
+04 - SELECT - MOBILE
+*************/
 
 .Select_Container {
-  margin: 37% 0% 0% 0%;
+  margin: 120% 0% 0% 0%;
 }
 
 .app-background {
@@ -120,8 +132,8 @@ MOBILE DEVICES - SMARTPHONES
 }
 
 .window {
-  width: 70vw;
-  height: 60vh;
+  width: 90vw;
+  height: 70vh;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.8);
   overflow: hidden;
@@ -139,7 +151,7 @@ nav {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom: 1px solid #eeeeee;
-  height: 44px;
+  height: 65px;
 }
 
 .tabs {
@@ -166,7 +178,8 @@ li {
   padding: 0;
   margin: 0;
   font-family: "Helvetica", sans-serif;
-  font-weight: 500;
+
+  font-weight: 00;
   font-size: 20px;
 }
 
@@ -183,7 +196,7 @@ li {
   padding: 10px 15px;
   position: relative;
   cursor: pointer;
-  height: 24px;
+  height: 42px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -199,30 +212,64 @@ li.selected {
 }
 
 .selected-content {
-  font-size: 24px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
   color: black;
   text-align: center;
-  margin: 20px;
 }
 
-/************* 
+.dynamic_background img {
+  margin: 10% 0% 0% 0%;
+}
+
+a.link_button {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 0px 0px;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.Select_button {
+  background-color: white;
+  color: black;
+  width: 35vw;
+  height: 8vh;
+  align-content: center;
+  border-radius: 5px;
+}
+
+/*************
+  *************
+  *************
   MOBILE DEVICES - TABLETS
+  *************
+  *************
   *************/
 
 @media (min-width: 768px) {
-  .logo img {
-    margin: -150% 0% 0% 0%;
-    width: 30%;
+  .logo-layer {
+    z-index: 11;
+    margin: -50% 0% 0% 0%;
   }
 
-  /* 01 JUNGLE */
+  .logo-img {
+    width: 20%;
+    top: 0;
+    position: sticky;
+  }
+
+  /*************
+01 - JUNGLE - TABLET
+*************/
 
   .Jungle_temple {
-    margin: 60% 0% 0% 50%;
+    margin: 30% 0% 0% 50%;
   }
 
   .Jungle_tiger img {
-    margin: 0% 30% 0% 0%;
+    margin: -50% 30% 0% 0%;
     width: 60%;
   }
 
@@ -230,7 +277,9 @@ li.selected {
     font-size: 30px;
   }
 
-  /* 02 ICE */
+  /*************
+02 - ICE - TABLET
+*************/
 
   .Ice_text h1 {
     margin: 250% 10% 10% 10%;
@@ -238,62 +287,92 @@ li.selected {
   }
 
   .Ice_Crystals {
-    opacity: 80%;
+    opacity: 70%;
     margin: 50% 0% 0% 0%;
   }
 
   .Ice_cubes_01 {
-    margin: -8% 0% 0% -27%;
+    margin: 20% 0% 0% -27%;
   }
 
   .Ice_cubes_02 {
-    margin: -15% 0% 0% 30%;
+    margin: -5% 0% 0% 30%;
   }
 
   .Ice_cubes_03 {
     margin: 110% 0% 0% 24%;
   }
 
-  /* 03 SNOW */
+  /*************
+02 - SNOW - TABLET
+*************/
 
   .Snow_text h1 {
     margin: 450% 10% 10% 10%;
     font-size: 30px;
   }
 
+  .Snow_background_02 {
+    margin: -10% 0% 0% 0%;
+  }
+
   .Snow_tree {
-    margin: -150% 0% 0% -20%;
+    margin: -90% 0% 0% -40%;
   }
 
   .Snow_tree_02 {
     margin: -50% 0% 0% 50%;
   }
-
+  /* 
   .Snow_button p {
     font-size: 30px;
+  } */
+
+  /*************
+04 - SELECT - TABLET
+*************/
+
+  .Select_Container {
+    margin: 78% 0% 0% 0%;
+  }
+
+  .window {
+    width: 80vw;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dynamic_background img {
+    margin: 0% 0% 0% 0%;
   }
 }
 
-/************* 
-  DESKTOP DEVICES 
+/*************
+  *************
+  *************
+  DESKTOP DEVICES
+  *************
+  *************
   *************/
 
 @media (min-width: 1024px) {
-  .logo img {
-    margin: -60% 0% 0% 0%;
-    width: 15%;
+  .logo-layer {
+    margin: -20% 0% 0% 0%;
   }
 
-  /* 01 JUNGLE */
+  /*************
+01 - JUNGLE - DESKTOP
+*************/
 
   .Jungle_temple img {
-    margin: 300% 0% 0% 0%;
-    width: 100%;
+    margin: -40% 0% 0% 0%;
+    width: 70%;
   }
 
   .Jungle_tiger img {
-    margin: 0% 30% 0% 0%;
-    width: 60%;
+    margin: -20% 60% 0% 0%;
+    width: 40%;
   }
 
   .Jungle_text h1 {
@@ -301,7 +380,9 @@ li.selected {
     font-size: 30px;
   }
 
-  /* 02 ICE */
+  /*************
+02 - ICE - DESKTOP
+*************/
 
   .Ice_text h1 {
     margin: 120% 10% 10% 10%;
@@ -314,7 +395,7 @@ li.selected {
   }
 
   .Ice_cubes_01 img {
-    margin: 10% 0% 0% 0%;
+    margin: -20% 20% 0% 0%;
     width: 20%;
   }
 
@@ -325,10 +406,12 @@ li.selected {
 
   .Ice_cubes_03 img {
     width: 20%;
-    margin: -110% 0% 0% 0%;
+    margin: -120% 0% 0% 0%;
   }
 
-  /* 03 SNOW */
+  /*************
+03 - SNOW - DESKTOP
+*************/
 
   .Snow_text h1 {
     margin: 250% 10% 10% 10%;
@@ -336,20 +419,137 @@ li.selected {
   }
 
   .Snow_tree img {
-    margin: 290% 0% 0% -30%;
-    width: 40%;
-  }
-
-  .Snow_tree_02 img {
-    margin: 60% 0% 0% 00%;
+    margin: 80% 0% 0% -30%;
     width: 50%;
   }
 
-  .Snow_button p {
-    font-size: 30px;
+  .Snow_tree_02 img {
+    margin: 20% 0% 0% 00%;
+    width: 50%;
   }
+
+  /* .Snow_button p {
+    font-size: 30px;
+  } */
 
   .Snow_background {
     margin: -10% 0% 0% 0%;
+  }
+
+  /*************
+04 - SELECT - DESKTOP
+*************/
+
+  .Select_Container {
+    margin: 37% 0% 0% 0%;
+  }
+
+  .app-background {
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .productImg {
+    width: 200px;
+  }
+
+  .window {
+    width: 70vw;
+    height: 60vh;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 5px 0;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid #eeeeee;
+    height: 44px;
+  }
+
+  .tabs {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 128px;
+    flex-grow: 1;
+    user-select: none;
+    flex-direction: row;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  ul {
+    display: flex;
+    width: 100%;
+  }
+
+  li {
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    width: 100%;
+    padding: 10px 15px;
+    position: relative;
+    cursor: pointer;
+    height: 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    user-select: none;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  li.selected {
+    background: #eee;
+  }
+
+  .selected-content {
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .Select_button {
+    background-color: white;
+    color: black;
+    width: 15vw;
+    height: 5vh;
+    align-content: center;
+    border-radius: 5px;
   }
 }
