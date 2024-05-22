@@ -23,8 +23,6 @@ const ThreeScene = () => {
       0.1,
       1000
     );
-    camera.position.set(0, 0.1, 0.1); 
-    camera.lookAt(0, 0, 0); 
 
     // RENDERER
     const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
@@ -58,12 +56,10 @@ const ThreeScene = () => {
           console.log("Avatar loaded successfully");
           const avatar = gltf.scene;
           scene.add(avatar);
-          avatar.scale.set(0.02, 0.02, 0.02);
-          avatar.position.y = -0.12;
-          avatar.position.x = -0.05;
-          avatar.rotation.y = Math.PI / 3.5;
-
-          avatar.add(camera);
+          gltf.scene.scale.set(0.02, 0.02, 0.02);
+          gltf.scene.position.y = -0.12;
+          gltf.scene.position.x = -0.05;
+          gltf.scene.rotation.y = Math.PI / 3.5;
         },
         undefined,
         function (error) {
@@ -75,9 +71,9 @@ const ThreeScene = () => {
     }
 
     // LIGHTS
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(0, 1, 0);
     scene.add(directionalLight);
 

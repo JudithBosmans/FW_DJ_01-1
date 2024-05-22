@@ -21,12 +21,6 @@ MOBILE DEVICES - SMARTPHONES
   background-attachment: fixed;
 }
 
-.text {
-  font-weight: 700;
-  font-size: 30px;
-  margin: 1% 0% 0% 0%;
-}
-
 .Jungle_text h1 {
   font-weight: 1000;
   font-size: 25px;
@@ -34,7 +28,7 @@ MOBILE DEVICES - SMARTPHONES
 }
 
 .logo img {
-  margin: -230% 0% 0% 0%;
+  margin: -100% 0% 0% 0%;
   width: 60%;
 }
 
@@ -106,6 +100,109 @@ MOBILE DEVICES - SMARTPHONES
   color: black;
   border: none;
   cursor: pointer;
+}
+
+/* 04 SELECT */
+
+.Select_Container {
+  margin: 37% 0% 0% 0%;
+}
+
+.app-background {
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productImg {
+  width: 200px;
+}
+
+.window {
+  width: 70vw;
+  height: 60vh;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 5px 0;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid #eeeeee;
+  height: 44px;
+}
+
+.tabs {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 128px;
+  flex-grow: 1;
+  user-select: none;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+ul {
+  display: flex;
+  width: 100%;
+}
+
+li {
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 100%;
+  padding: 10px 15px;
+  position: relative;
+  cursor: pointer;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+li.selected {
+  background: #eee;
+}
+
+.selected-content {
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  margin: 20px;
 }
 
 /************* 

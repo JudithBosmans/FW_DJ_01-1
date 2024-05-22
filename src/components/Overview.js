@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
+import { initialTabs as tabs } from "./Select.ts";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { animated } from "react-spring";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import Typewriter from "typewriter-effect";
 import "../styles/Overview.css";
 
 ///////////////
@@ -13,6 +17,7 @@ import "../styles/Overview.css";
 
 //GENERAL
 import logo from "../pics/Dr.Jart+_white_logo.png";
+import specifications from "./Specification.js";
 
 //01 JUNGLE
 import Jungle_00 from "../pics/01/03_Background.png";
@@ -32,52 +37,9 @@ import Snow_01 from "../pics/03/03_Snow_Background.png";
 import Snow_02 from "../pics/03/03_Trees_01.png";
 
 const Overview = ({ modelUrl }) => {
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const navigate = useNavigate();
   const mountRef = useRef(null);
-
-  useEffect(() => {
-    if (!mountRef.current) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    mountRef.current.appendChild(renderer.domElement);
-
-    const loader = new GLTFLoader();
-
-    const avatarUrl = localStorage.getItem("avatarUrl");
-    console.log("Avatar URL:", avatarUrl); // Ensure this is not undefined
-
-    if (avatarUrl) {
-      loader.load(
-        avatarUrl,
-        (gltf) => {
-          scene.add(gltf.scene);
-          camera.position.z = 5;
-          const animate = () => {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-          };
-          animate();
-        },
-        undefined,
-        function (error) {
-          console.error("Error loading GLTF:", error);
-        }
-      );
-    } else {
-      console.error("No avatar URL found in localStorage");
-    }
-
-    return () => {
-      mountRef.current.removeChild(renderer.domElement);
-    };
-  }, []);
 
   const alignCenter = {
     display: "flex",
@@ -85,256 +47,311 @@ const Overview = ({ modelUrl }) => {
     justifyContent: "center",
   };
 
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+    navigate("/Specification", { state: { tab } });
+  };
+
   return (
-    <Parallax pages={2.1} className="parallax_container">
-      <ParallaxLayer offset={0} speed={1} factor={1} className="Avatar">
-        <div
-          ref={mountRef}
-          style={{ width: "100%", height: "100vh", zIndex: 50 }}
-        />
-      </ParallaxLayer>
-      {/************* 
+    <div>
+      <Parallax pages={2.3} className="parallax_container">
+        <ParallaxLayer offset={0} speed={1} factor={1} className="Avatar">
+          <div
+            ref={mountRef}
+            style={{ width: "100%", height: "100vh", zIndex: 50 }}
+          />
+        </ParallaxLayer>
+        {/************* 
     ***************
       01 JUNGLE 
     ***************
     *************/}
-      <ParallaxLayer
-        offset={0}
-        speed={2}
-        factor={2}
-        className="logo"
-        style={{
-          ...alignCenter,
-          zIndex: 10,
-        }}
-      >
-        <animated.img src={logo} alt="Logo" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0}
-        speed={2}
-        factor={1}
-        className="text"
-        style={{
-          ...alignCenter,
-          zIndex: 11,
-        }}
-      >
-        <Typewriter
-          options={{
-            strings: ["Skin.", "Science.", "Art."],
-            autoStart: true,
-            loop: true,
+        <ParallaxLayer
+          offset={0}
+          speed={2}
+          factor={2}
+          className="logo"
+          style={{
+            ...alignCenter,
+            zIndex: 10,
+          }}
+        >
+          <animated.img src={logo} alt="Logo" />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Jungle_text"
+          style={{
+            ...alignCenter,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 10,
+          }}
+        >
+          <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Jungle_background"
+          style={{
+            border: "none",
+            backgroundImage: `url(${Jungle_00})`,
+            backgroundSize: `cover`,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 0,
           }}
         />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0}
-        speed={1}
-        factor={1}
-        className="Jungle_text"
-        style={{
-          ...alignCenter,
-          backgroundRepeat: `no-repeat`,
-          zIndex: 10,
-        }}
-      >
-        <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0}
-        speed={1}
-        factor={1}
-        className="Jungle_background"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Jungle_00})`,
-          backgroundSize: `cover`,
-          backgroundRepeat: `no-repeat`,
-          zIndex: 0,
-        }}
-      />
-      <ParallaxLayer
-        offset={0}
-        speed={1}
-        factor={1}
-        className="Jungle_Forrest"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Jungle_01})`,
-          backgroundSize: `cover`,
-          zIndex: 1,
-        }}
-      />
-      <ParallaxLayer
-        offset={0}
-        speed={3}
-        factor={1}
-        className="Jungle_Forrest"
-        style={{
-          ...alignCenter,
-          zIndex: 7,
-        }}
-      >
-        <img src={Jungle_01} alt="Jungle_background" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0}
-        speed={2}
-        factor={2}
-        className="Jungle_temple"
-        style={{
-          border: "none",
-          zIndex: 8,
-        }}
-      >
-        <img src={Jungle_02} alt="Tiger" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0}
-        speed={3}
-        factor={2}
-        className="Jungle_tiger"
-        style={{
-          ...alignCenter,
-          zIndex: 8,
-        }}
-      >
-        <img src={Jungle_03} alt="Tiger" />
-      </ParallaxLayer>
-      {/************* 
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Jungle_Forrest"
+          style={{
+            border: "none",
+            backgroundImage: `url(${Jungle_01})`,
+            backgroundSize: `cover`,
+            zIndex: 1,
+          }}
+        />
+        <ParallaxLayer
+          offset={0}
+          speed={3}
+          factor={1}
+          className="Jungle_Forrest"
+          style={{
+            ...alignCenter,
+            zIndex: 7,
+          }}
+        >
+          <img src={Jungle_01} alt="Jungle_background" />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          speed={2}
+          factor={2}
+          className="Jungle_temple"
+          style={{
+            border: "none",
+            zIndex: 8,
+          }}
+        >
+          <img src={Jungle_02} alt="Tiger" />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          speed={3}
+          factor={2}
+          className="Jungle_tiger"
+          style={{
+            ...alignCenter,
+            zIndex: 8,
+          }}
+        >
+          <img src={Jungle_03} alt="Tiger" />
+        </ParallaxLayer>
+        {/************* 
     ***************
         02 ICE
     ***************
     *************/}
-      <ParallaxLayer
-        offset={0.9}
-        speed={1}
-        factor={1.3}
-        className="Ice_background"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Ice_00})`,
-          backgroundSize: `cover`,
-          zIndex: 1,
-        }}
-      />
-      <ParallaxLayer
-        offset={0}
-        speed={1}
-        factor={1}
-        className="Ice_text"
-        style={{
-          ...alignCenter,
-          backgroundRepeat: `no-repeat`,
-          zIndex: 10,
-        }}
-      >
-        <h1>A WORLD FILLED WITH THE NEWEST TECHNOLOGIES</h1>
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0.9}
-        speed={2}
-        factor={1}
-        className="Ice_Crystals"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Ice_04})`,
-          backgroundSize: `cover`,
-          zIndex: 1,
-        }}
-      />
-      <ParallaxLayer
-        offset={0.9}
-        speed={3}
-        factor={2}
-        className="Ice_cubes_01"
-        style={{
-          ...alignCenter,
-          zIndex: 10,
-        }}
-      >
-        <img src={Ice_01} alt="Cubes_01" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0.9}
-        speed={3}
-        factor={2}
-        className="Ice_cubes_02"
-        style={{
-          ...alignCenter,
-          zIndex: 10,
-        }}
-      >
-        <img src={Ice_02} alt="Cubes_02" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={0.9}
-        speed={3}
-        factor={2}
-        className="Ice_cubes_03"
-        style={{
-          ...alignCenter,
-          zIndex: 10,
-        }}
-      >
-        <img src={Ice_03} alt="Cubes_03" />
-      </ParallaxLayer>
-      {/************* 
+        <ParallaxLayer
+          offset={0.9}
+          speed={1}
+          factor={1.3}
+          className="Ice_background"
+          style={{
+            border: "none",
+            backgroundImage: `url(${Ice_00})`,
+            backgroundSize: `cover`,
+            zIndex: 1,
+          }}
+        />
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Ice_text"
+          style={{
+            ...alignCenter,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 10,
+          }}
+        >
+          <h1>A WORLD FILLED WITH THE NEWEST TECHNOLOGIES</h1>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0.9}
+          speed={2}
+          factor={1}
+          className="Ice_Crystals"
+          style={{
+            border: "none",
+            backgroundImage: `url(${Ice_04})`,
+            backgroundSize: `cover`,
+            zIndex: 1,
+          }}
+        />
+        <ParallaxLayer
+          offset={0.9}
+          speed={3}
+          factor={2}
+          className="Ice_cubes_01"
+          style={{
+            ...alignCenter,
+            zIndex: 10,
+          }}
+        >
+          <img src={Ice_01} alt="Cubes_01" />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0.9}
+          speed={3}
+          factor={2}
+          className="Ice_cubes_02"
+          style={{
+            ...alignCenter,
+            zIndex: 10,
+          }}
+        >
+          <img src={Ice_02} alt="Cubes_02" />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0.9}
+          speed={3}
+          factor={2}
+          className="Ice_cubes_03"
+          style={{
+            ...alignCenter,
+            zIndex: 10,
+          }}
+        >
+          <img src={Ice_03} alt="Cubes_03" />
+        </ParallaxLayer>
+        {/************* 
     ***************
         03 SNOW 
     ***************
     *************/}
-      <ParallaxLayer
-        offset={0}
-        speed={1}
-        factor={1}
-        className="Snow_text"
-        style={{
-          ...alignCenter,
-          backgroundRepeat: `no-repeat`,
-          zIndex: 10,
-        }}
-      >
-        <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={1}
-        speed={1}
-        factor={1.5}
-        className="Snow_background_02"
-        style={{
-          border: "none",
-          backgroundImage: `url(${Snow_01})`,
-          backgroundSize: `cover`,
-          zIndex: 0,
-        }}
-      />
-      <ParallaxLayer
-        offset={1}
-        speed={2}
-        factor={2}
-        className="Snow_tree"
-        style={{
-          ...alignCenter,
-          zIndex: 8,
-        }}
-      >
-        <img src={Snow_02} alt="Snow_tree" />
-      </ParallaxLayer>
-      <ParallaxLayer
-        offset={1}
-        speed={3}
-        factor={2}
-        className="Snow_tree_02"
-        style={{
-          ...alignCenter,
-          zIndex: 8,
-        }}
-      >
-        <img src={Snow_02} alt="Snow_tree_02" />
-      </ParallaxLayer>
-    </Parallax>
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Snow_text"
+          style={{
+            ...alignCenter,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 10,
+          }}
+        >
+          <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={1}
+          speed={1}
+          factor={1.5}
+          className="Snow_background_02"
+          style={{
+            border: "none",
+            backgroundImage: `url(${Snow_01})`,
+            backgroundSize: `cover`,
+            zIndex: 0,
+          }}
+        />
+        <ParallaxLayer
+          offset={1}
+          speed={2}
+          factor={2}
+          className="Snow_tree"
+          style={{
+            ...alignCenter,
+            zIndex: 8,
+          }}
+        >
+          <img src={Snow_02} alt="Snow_tree" />
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={1}
+          speed={3}
+          factor={2}
+          className="Snow_tree_02"
+          style={{
+            ...alignCenter,
+            zIndex: 8,
+          }}
+        >
+          <img src={Snow_02} alt="Snow_tree_02" />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1.5}
+          speed={1}
+          factor={3}
+          className="dynamic_background"
+          style={{
+            zIndex: 8,
+          }}
+        >
+          <img src={selectedTab.backgroundImage} alt="Dynamic Background" />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1.5}
+          speed={2}
+          factor={3}
+          className="Select_Container"
+          style={{
+            zIndex: 10,
+          }}
+        >
+          <div className="app-background">
+            <div className="window">
+              <nav>
+                <ul>
+                  {tabs.map((item) => (
+                    <li
+                      key={item.label}
+                      className={item === selectedTab ? "selected" : ""}
+                      onClick={() => handleTabClick(item)} // Only update the selected tab here
+                    >
+                      {`${item.icon} ${item.label}`}
+                      {item === selectedTab ? <motion.div /> : null}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <main>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedTab ? selectedTab.label : "empty"}
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="selected-content"
+                  >
+                    {selectedTab ? selectedTab.text : "Text"}
+                    <img
+                      className="productImg"
+                      src={selectedTab.productShot}
+                      alt="Dynamic-Background"
+                    />
+                    <Link to="/Specification" state={{ tab: selectedTab }}>
+                      <div className="Snow_button">
+                        <p>Choose</p>
+                      </div>
+                    </Link>
+                  </motion.div>
+                </AnimatePresence>
+              </main>
+            </div>
+          </div>
+        </ParallaxLayer>
+      </Parallax>
+    </div>
   );
 };
 

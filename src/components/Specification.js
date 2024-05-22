@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import "../styles/Specification.css";
+import { useLocation } from "react-router-dom";
 
 const Specification = () => {
   const ref = useRef(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const { tab } = location.state || { tab: {} };
 
   useEffect(() => {
     const loadedImages = new Array(250);
@@ -76,6 +79,12 @@ const Specification = () => {
       className="Overview_container"
       style={{ height: "5000px", overflow: "auto" }}
     >
+      <div>
+        <h1>{tab.label}</h1>
+        <p>{tab.text}</p>
+        {tab.productShot && <img src={tab.productShot} alt={tab.label} />}
+        {/* Render more content based on tab data */}
+      </div>
       <canvas
         ref={ref}
         className="canvasStyle"

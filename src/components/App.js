@@ -303,7 +303,6 @@ const App = () => {
           </div>
         </Link>
       </ParallaxLayer>
-      {/* <ParallaxLayer sticky={{ start: 1, end: 2 }} /> */}
     </Parallax>
   );
 };
