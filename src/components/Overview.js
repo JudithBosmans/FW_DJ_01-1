@@ -1,13 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Test from "./Test.js";
 
 import { initialTabs as tabs } from "./Select.ts";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { animated } from "react-spring";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import "../styles/Overview.css";
 
@@ -90,6 +87,21 @@ const Overview = () => {
         >
           <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
         </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          factor={1}
+          className="Jungle_text"
+          style={{
+            ...alignCenter,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 10,
+          }}
+        >
+          <Test />
+        </ParallaxLayer>
+
         <ParallaxLayer
           offset={0}
           speed={1}

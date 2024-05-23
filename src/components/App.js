@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { useSpring, animated } from "react-spring";
+import { animated } from "react-spring";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import Typewriter from "typewriter-effect";
 import "../styles/App.css";

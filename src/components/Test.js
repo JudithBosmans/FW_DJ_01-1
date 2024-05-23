@@ -1,102 +1,94 @@
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import back from "../pics/back.hdr";
 
-const ThreeScene = () => {
+const Test = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!canvasRef.current) {
-      return;
-    }
+    if (!canvasRef.current) return;
 
-    // SCENE
     const scene = new THREE.Scene();
-
-    // CAMERA
     const camera = new THREE.PerspectiveCamera(
       50,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
+    camera.position.set(3, 1, 3);
 
-    // RENDERER
-    const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
+      alpha: true,
+      antialias: true,
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1;
-    renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
-    // Handle window resize
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+    };
+    window.addEventListener("resize", handleResize);
 
-    // HDR ENVIRONMENT MAP
-    new RGBELoader().load(back, (texture) => {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
-      scene.environment = texture;
-      scene.background = texture;
-    });
-
-    // AVATAR
     const avatarUrl = localStorage.getItem("avatarUrl");
+    const animationUrl = "/assets/animation/animation.fbx";
     if (avatarUrl) {
       const avatarLoader = new GLTFLoader();
       avatarLoader.load(
         avatarUrl,
         function (gltf) {
-          console.log("Avatar loaded successfully");
           const avatar = gltf.scene;
           scene.add(avatar);
-          gltf.scene.scale.set(0.02, 0.02, 0.02);
-          gltf.scene.position.y = -0.12;
-          gltf.scene.position.x = -0.05;
-          gltf.scene.rotation.y = Math.PI / 3.5;
+          avatar.scale.set(2.5, 2.5, 2.5);
+          avatar.position.set(0, -1, 0);
+          camera.lookAt(avatar.position);
+
+          if (animationUrl) {
+            const loader = new FBXLoader();
+            loader.load(
+              animationUrl,
+              function (fbx) {
+                console.log("Animation loaded successfully");
+                const mixer = new THREE.AnimationMixer(avatar);
+                const action = mixer.clipAction(fbx.animations[0]);
+                action.play();
+              },
+              undefined,
+              function (error) {
+                console.error("Failed to load animation:", error);
+              }
+            );
+          }
         },
         undefined,
         function (error) {
           console.error("Failed to load the avatar:", error);
         }
       );
-    } else {
-      console.error("No avatar URL found in localStorage");
     }
 
-    // LIGHTS
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(0, 1, 0);
+    directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
 
-    // CONTROLS
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.update();
-
-    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-      controls.update();
       renderer.render(scene, camera);
     };
-
     animate();
 
     return () => {
-      renderer.domElement && renderer.domElement.remove();
-      controls.dispose();
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return <canvas ref={canvasRef} className="webgl"></canvas>;
 };
 
-export default ThreeScene;
+export default Test;

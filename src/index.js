@@ -11,6 +11,7 @@ import Overview from "./components/Overview.js";
 import Specification from "./components/Specification.js";
 
 import Test from "./components/Test.js";
+import Test02 from "./components/Test02.js";
 
 const router = createBrowserRouter([
   {
@@ -33,10 +34,14 @@ const router = createBrowserRouter([
     element: <Specification />,
     errorElement: <ErrorPage />,
   },
-
   {
     path: "/Test",
     element: <Test />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Test02",
+    element: <Test02 />,
     errorElement: <ErrorPage />,
   },
 ]);
