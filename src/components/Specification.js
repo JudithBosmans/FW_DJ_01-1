@@ -3,12 +3,66 @@ import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import "../styles/Specification.css";
 import { useLocation } from "react-router-dom";
 
+import { specificationData } from "./Select.ts";
+
 const Specification = () => {
   const ref = useRef(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const { tab } = location.state || { tab: {} };
+  const [containerHeight, setContainerHeight] = useState("150vh");
+
+  useEffect(() => {
+    const canvas = ref.current;
+    if (canvas) {
+      console.log("Canvas is available");
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+      } else {
+        console.error("Failed to get 2D context.");
+      }
+    } else {
+      console.error("Canvas element is not available.");
+    }
+  }, []);
+
+  useEffect(() => {
+    function updateContainerHeight() {
+      const screenHeight = window.innerHeight;
+      setContainerHeight(`${screenHeight + screenHeight / 2}px`);
+    }
+
+    updateContainerHeight();
+    window.addEventListener("resize", updateContainerHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateContainerHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const canvas = ref.current;
+      if (!canvas) {
+        console.error("Canvas element is not available.");
+        return;
+      }
+
+      const scale = window.devicePixelRatio;
+      canvas.style.width = "80vw";
+      canvas.width = canvas.offsetWidth * scale;
+      canvas.height = canvas.offsetHeight * scale;
+      console.log("Canvas resized");
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const loadedImages = new Array(250);
@@ -35,7 +89,7 @@ const Specification = () => {
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
-    layoutEffect: false,
+    layoutEffect: true,
   });
 
   const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 249]);
@@ -43,8 +97,18 @@ const Specification = () => {
   const render = useCallback(
     (index) => {
       const canvas = ref.current;
-      const ctx = canvas?.getContext("2d");
-      if (ctx && images[index]) {
+      if (!canvas) {
+        console.error("Canvas element is not available.");
+        return;
+      }
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        console.error("Failed to get 2D context.");
+        return;
+      }
+
+      if (images[index]) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const img = images[index];
 
@@ -57,10 +121,6 @@ const Specification = () => {
         const y = (canvas.height - img.height * scale) / 2;
 
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-      } else {
-        console.error(
-          "Canvas is not available or getContext is not a function"
-        );
       }
     },
     [images]
@@ -77,19 +137,18 @@ const Specification = () => {
   return (
     <div
       className="Overview_container"
-      style={{ height: "5000px", overflow: "auto" }}
+      style={{
+        height: containerHeight,
+        overflow: "auto",
+      }}
     >
-      <div>
-        <h1>{tab.name}</h1>
-        <p>{tab.text}</p>
-        {tab.productShot && <img src={tab.productShot} alt={tab.label} />}
+      <div className="tab_container">
+        <h1>{tab.label}</h1>
       </div>
       <canvas
         ref={ref}
         className="canvasStyle"
-        width="1000"
-        height="800"
-        style={{ border: "1px solid red" }}
+        style={{ border: "1px solid red", width: "80vw", height: "80vh" }}
       ></canvas>
     </div>
   );

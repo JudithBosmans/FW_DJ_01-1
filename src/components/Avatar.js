@@ -15,7 +15,6 @@ function ReadyPlayerMeComponent() {
         return;
       }
 
-      // Subscribe to all events sent from Ready Player Me once frame is ready
       if (json.eventName === "v1.frame.ready") {
         frame.contentWindow.postMessage(
           JSON.stringify({
@@ -27,14 +26,13 @@ function ReadyPlayerMeComponent() {
         );
       }
 
-      // Get avatar GLB URL and navigate to another page
+      // Get avatar GLB URL, navigate to Test
       if (json.eventName === "v1.avatar.exported") {
         console.log(`Avatar URL: ${json.data.url}`);
         localStorage.setItem("avatarUrl", json.data.url);
-        navigate("/Test");
+        navigate("/Overview");
       }
 
-      // Get user id
       if (json.eventName === "v1.user.set") {
         console.log(
           `User with id ${json.data.id} set: ${JSON.stringify(json)}`

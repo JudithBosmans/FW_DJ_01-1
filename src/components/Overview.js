@@ -4,6 +4,7 @@ import Test from "./Test.js";
 
 import { initialTabs as tabs } from "./Select.ts";
 import { motion, AnimatePresence } from "framer-motion";
+import Typewriter from "typewriter-effect";
 
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import "../styles/Overview.css";
@@ -49,15 +50,6 @@ const Overview = () => {
   return (
     <div>
       <Parallax pages={2.3} className="parallax_container" sticky={{ top: 10 }}>
-        {/* <ParallaxLayer offset={0} speed={1} factor={1} className="Avatar">
-          <div
-            ref={mountRef}
-            style={{ width: "100%", height: "100vh", zIndex: 50 }}
-          />
-
-
-
-        </ParallaxLayer> */}
         {/************* 
     ***************
       01 JUNGLE 
@@ -78,21 +70,29 @@ const Overview = () => {
           offset={0}
           speed={1}
           factor={1}
-          className="Jungle_text"
+          className="avatar01_text"
           style={{
             ...alignCenter,
-            backgroundRepeat: `no-repeat`,
-            zIndex: 10,
+            zIndex: 11,
           }}
         >
-          <h1>A WORLD WHERE IRRITATED SKIN DOESN’T EXIST</h1>
+          <Typewriter
+            options={{
+              strings: [
+                "Legend goes tigers rolled in Tiger Grass when wounded.",
+              ],
+              autoStart: true,
+              loop: true,
+              pauseFor: 3000,
+            }}
+          />
         </ParallaxLayer>
 
         <ParallaxLayer
           offset={0}
           speed={1}
           factor={1}
-          className="Jungle_text"
+          className="avatar_01"
           style={{
             ...alignCenter,
             backgroundRepeat: `no-repeat`,
@@ -168,6 +168,42 @@ const Overview = () => {
         02 ICE
     ***************
     *************/}
+
+        <ParallaxLayer
+          offset={0.9}
+          speed={1}
+          factor={1.3}
+          className="avatar02_text"
+          style={{
+            ...alignCenter,
+            zIndex: 99,
+          }}
+        >
+          <Typewriter
+            className="typewriter"
+            options={{
+              strings: ["Or have you heard yet of Cryo-Rubber technology?"],
+              autoStart: true,
+              loop: true,
+              pauseFor: 3000,
+            }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={0.9}
+          speed={1}
+          factor={1.3}
+          className="avatar_02"
+          style={{
+            ...alignCenter,
+            backgroundRepeat: `no-repeat`,
+            zIndex: 98,
+          }}
+        >
+          <Test />
+        </ParallaxLayer>
+
         <ParallaxLayer
           offset={0.9}
           speed={1}
@@ -180,19 +216,7 @@ const Overview = () => {
             zIndex: 1,
           }}
         />
-        <ParallaxLayer
-          offset={0}
-          speed={1}
-          factor={1}
-          className="Ice_text"
-          style={{
-            ...alignCenter,
-            backgroundRepeat: `no-repeat`,
-            zIndex: 10,
-          }}
-        >
-          <h1>A WORLD FILLED WITH THE NEWEST TECHNOLOGIES</h1>
-        </ParallaxLayer>
+
         <ParallaxLayer
           offset={0.9}
           speed={2}
@@ -246,21 +270,45 @@ const Overview = () => {
         03 SNOW 
     ***************
     *************/}
+
         <ParallaxLayer
-          offset={0}
+          offset={1.3}
           speed={1}
           factor={1}
-          className="Snow_text"
+          className="avatar03_text"
+          style={{
+            ...alignCenter,
+            zIndex: 11,
+          }}
+        >
+          <Typewriter
+            options={{
+              strings: [
+                "Or are you passionate about the protecting properties of ceramides?",
+              ],
+              autoStart: true,
+              loop: true,
+              pauseFor: 3000,
+            }}
+          />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          offset={1.3}
+          speed={1}
+          factor={1}
+          className="avatar_03"
           style={{
             ...alignCenter,
             backgroundRepeat: `no-repeat`,
             zIndex: 10,
           }}
         >
-          <h1>A WORLD OF HYDRATED & PROTECTED SKIN</h1>
+          <Test />
         </ParallaxLayer>
+
         <ParallaxLayer
-          offset={1}
+          offset={1.6}
           speed={1}
           factor={1}
           className="Snow_background_02"
@@ -320,7 +368,7 @@ const Overview = () => {
           factor={2}
           className="Select_Container"
           style={{
-            zIndex: 10,
+            zIndex: 1000,
           }}
         >
           <div className="app-background">

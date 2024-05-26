@@ -1,13 +1,14 @@
 body,
-html {
+html,
+p,
+h1 {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
 h1,
-.text,
-p {
-  font-family: Arial, Helvetica, sans-serif;
+.typewriter {
+  color: white;
 }
 
 /*************
@@ -22,16 +23,10 @@ MOBILE DEVICES - SMARTPHONES
   background-attachment: fixed;
 }
 
-.Jungle_text h1 {
-  font-weight: 1000;
-  font-size: 25px;
-  margin: 100% 10% 10% 10%;
-}
-
 .logo-layer {
   z-index: 11;
   top: 0;
-  margin: -70% 0% 0% 0%;
+  margin: -100% 0% 0% 0%;
 }
 
 .logo-img {
@@ -43,12 +38,23 @@ MOBILE DEVICES - SMARTPHONES
 01 - JUNGLE - MOBILE
 *************/
 
+.avatar01_text {
+  font-weight: 1000;
+  font-size: 25px;
+  color: #eee;
+  margin: 5% 0% 0% 0%;
+}
+
+.avatar_01 {
+  margin: 130% 0% 0% 25%;
+}
+
 .Jungle_temple {
   margin: 70% 0% 0% 0%;
 }
 
 .Jungle_tiger img {
-  margin: 140% 0% 0% 0%;
+  margin: 0% 0% 0% 0%;
   width: 100%;
 }
 
@@ -56,28 +62,32 @@ MOBILE DEVICES - SMARTPHONES
 02 - ICE - MOBILE
 *************/
 
-.Ice_text h1 {
-  margin: 370% 10% 10% 10%;
-
+.avatar02_text {
+  margin: 0%;
+  color: #eee;
   font-weight: 1000;
-  font-size: 20px;
+  font-size: 25px;
+}
+
+.avatar_02 {
+  margin: 120% 0% 0% -25%;
 }
 
 .Ice_cubes_01 {
-  margin: -27% 0% 0% -27%;
+  margin: 0% 0% 0% -27%;
 }
 
 .Ice_cubes_02 {
-  margin: -33% 0% 0% 30%;
+  margin: 10% 0% 0% 30%;
 }
 
 .Ice_cubes_03 {
-  margin: 140% 0% 0% 24%;
+  margin: 210% 0% 0% 24%;
 }
 
 .Ice_Crystals {
   opacity: 80%;
-  margin: 100% 0% 0% 0%;
+  margin: 90% 0% 0% 0%;
   height: 70vh;
 }
 
@@ -85,39 +95,35 @@ MOBILE DEVICES - SMARTPHONES
 03 - SNOW - MOBILE
 *************/
 
-.Snow_text h1 {
-  margin: 700% 10% 10% 10%;
+.avatar03_text {
+  margin: -50% 0% 0% 0%;
   font-weight: 1000;
-  font-size: 20px;
+  font-size: 25px;
+  color: #eee;
+}
+
+.avatar_03 {
+  margin: 60% 0% 0% 20%;
 }
 
 .Snow_tree {
-  margin: -80% 0% 0% -20%;
+  margin: -60% 0% 0% -20%;
 }
 
 .Snow_tree_02 {
-  margin: -270% 0% 0% 50%;
+  margin: -200% 0% 0% 50%;
 }
-/* 
-.Snow_button p {
-  margin: 0% 0% 200% 0%;
-  padding: 5px 10px 5px 10px;
 
-  background-color: white;
-  border-radius: 5px;
-
-  text-decoration: none;
-  color: black;
-  border: none;
-  cursor: pointer;
-} */
+.Snow_background_02 {
+  margin: -60% 0% 0% 0%;
+}
 
 /*************
 04 - SELECT - MOBILE
 *************/
 
 .Select_Container {
-  margin: 120% 0% 0% 0%;
+  margin: 135% 0% 0% 0%;
 }
 
 .app-background {
@@ -264,6 +270,14 @@ a.link_button {
 01 - JUNGLE - TABLET
 *************/
 
+  .avatar01_text {
+    margin: 5% 0% 0% 0%;
+  }
+
+  .avatar_01 {
+    margin: 62% 0% 0% 25%;
+  }
+
   .Jungle_temple {
     margin: 30% 0% 0% 50%;
   }
@@ -273,17 +287,16 @@ a.link_button {
     width: 60%;
   }
 
-  .Jungle_text h1 {
-    font-size: 30px;
-  }
-
   /*************
 02 - ICE - TABLET
 *************/
 
-  .Ice_text h1 {
-    margin: 250% 10% 10% 10%;
-    font-size: 30px;
+  .avatar02_text {
+    margin: 5% 0% 0% 0%;
+  }
+
+  .avatar_02 {
+    margin: 62% 0% 0% -25%;
   }
 
   .Ice_Crystals {
@@ -307,13 +320,16 @@ a.link_button {
 02 - SNOW - TABLET
 *************/
 
-  .Snow_text h1 {
-    margin: 450% 10% 10% 10%;
-    font-size: 30px;
+  .avatar03_text {
+    margin: -30% 0% 0% 0%;
+  }
+
+  .avatar_03 {
+    margin: 25% 0% 0% 25%;
   }
 
   .Snow_background_02 {
-    margin: -10% 0% 0% 0%;
+    margin: -35% 0% 0% 0%;
   }
 
   .Snow_tree {
@@ -375,9 +391,13 @@ a.link_button {
     width: 40%;
   }
 
-  .Jungle_text h1 {
-    margin: 20% 0% 0% 0%;
-    font-size: 30px;
+  .avatar01_text {
+    margin: 0% 0% 0% 10%;
+    font-size: 35px;
+  }
+
+  .avatar_01 {
+    margin: 25% 0% 0% 25%;
   }
 
   /*************
@@ -428,12 +448,8 @@ a.link_button {
     width: 50%;
   }
 
-  /* .Snow_button p {
-    font-size: 30px;
-  } */
-
   .Snow_background {
-    margin: -10% 0% 0% 0%;
+    margin: 0% 0% -50% 0%;
   }
 
   /*************
