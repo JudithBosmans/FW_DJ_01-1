@@ -195,6 +195,10 @@ DESKTOP DEVICES
 
   /* 01 JUNGLE */
 
+  .text {
+    margin: 0% 0% 0% 0%;
+  }
+
   .Jungle_temple img {
     margin: 300% 0% 0% 0%;
     width: 100%;
@@ -240,7 +244,7 @@ DESKTOP DEVICES
   /* 03 SNOW */
 
   .Snow_text h1 {
-    margin: 210% 10% 10% 10%;
+    margin: -30% 0% 0% 0%;
     font-size: 30px;
   }
 
@@ -259,6 +263,6 @@ DESKTOP DEVICES
   }
 
   .Snow_background {
-    margin: -10% 0% 0% 0%;
+    margin: 0% 0% 0% 0%;
   }
 }

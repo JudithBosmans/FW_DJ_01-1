@@ -26,7 +26,7 @@ function ReadyPlayerMeComponent() {
         );
       }
 
-      // Get avatar GLB URL, navigate to Test
+      // Get avatar URL, navigate to Test
       if (json.eventName === "v1.avatar.exported") {
         console.log(`Avatar URL: ${json.data.url}`);
         localStorage.setItem("avatarUrl", json.data.url);

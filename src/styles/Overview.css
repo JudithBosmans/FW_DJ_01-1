@@ -404,9 +404,13 @@ a.link_button {
 02 - ICE - DESKTOP
 *************/
 
-  .Ice_text h1 {
-    margin: 120% 10% 10% 10%;
-    font-size: 30px;
+  .avatar02_text {
+    margin: 0% 0% 0% -10%;
+    font-size: 35px;
+  }
+
+  .avatar_02 {
+    margin: 30% 0% 0% -25%;
   }
 
   .Ice_Crystals {
@@ -433,9 +437,13 @@ a.link_button {
 03 - SNOW - DESKTOP
 *************/
 
-  .Snow_text h1 {
-    margin: 250% 10% 10% 10%;
-    font-size: 30px;
+  .avatar03_text {
+    margin: -25% 0% 0% 0%;
+    font-size: 35px;
+  }
+
+  .avatar_03 {
+    margin: 5% 0% 0% 20%;
   }
 
   .Snow_tree img {

@@ -239,7 +239,7 @@ const App = () => {
     *************/}
 
       <ParallaxLayer
-        offset={0}
+        offset={1}
         speed={1}
         factor={1}
         className="Snow_text"
@@ -253,7 +253,7 @@ const App = () => {
       </ParallaxLayer>
 
       <ParallaxLayer
-        offset={1}
+        offset={1.7}
         speed={1}
         factor={1}
         className="Snow_background_02"
