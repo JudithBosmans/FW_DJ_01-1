@@ -2,15 +2,17 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
+import "../styles/Game.css";
 
 const Game = () => {
   const canvasRef = useRef();
   const messageRef = useRef();
-  const scoreRef = useRef(0);
+
   const objectsLoadedRef = useRef({
     object1: false,
     object2: false,
     object3: false,
+    object4: false,
   });
   const startCollisionCheckRef = useRef(false);
   const group = new THREE.Group();
@@ -24,55 +26,8 @@ const Game = () => {
      ***********/
     scene.add(group);
 
-    let object1, object2, object3, controls;
+    let object1, object2, object3, object4;
     let camera, renderer;
-
-    const loadObjects = () => {
-      loader.load("/assets/hover/cicapairHover2.glb", (gltf) => {
-        object1 = gltf.scene;
-        object1.scale.set(0.1, 0.1, 0.1);
-        object1.position.set(0, -2, 0);
-        object1.rotation.y = Math.PI / 4;
-        group.add(object1);
-        console.log("Loaded object1:", object1);
-        objectsLoadedRef.current.object1 = true;
-        checkAllObjectsLoaded();
-        initializeDragControls();
-      });
-
-      loader.load("/assets/hover/cat.glb", (gltf) => {
-        object2 = gltf.scene;
-        object2.scale.set(0.007, 0.007, 0.007);
-        object2.position.set(7, -5, -7);
-        object2.rotation.y = Math.PI / -4;
-        group.add(object2);
-        console.log("Loaded object2:", object2);
-        objectsLoadedRef.current.object2 = true;
-        checkAllObjectsLoaded();
-        initializeDragControls();
-      });
-
-      loader.load("/assets/hover/cat.glb", (gltf) => {
-        object3 = gltf.scene;
-        object3.scale.set(0.007, 0.007, 0.007);
-        object3.position.set(0, -5, -7);
-        object3.rotation.y = Math.PI / -4;
-        group.add(object3);
-        console.log("Loaded object3:", object3);
-        objectsLoadedRef.current.object3 = true;
-        checkAllObjectsLoaded();
-        initializeDragControls();
-      });
-    };
-
-    const checkAllObjectsLoaded = () => {
-      const { object1, object2, object3 } = objectsLoadedRef.current;
-      if (object1 && object2 && object3) {
-        setTimeout(() => {
-          startCollisionCheckRef.current = true;
-        }, 1000);
-      }
-    };
 
     /************
      * SIZES
@@ -91,29 +46,83 @@ const Game = () => {
     /************
      * CANVAS & RENDERER
      ***********/
-    renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
+      alpha: true,
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
     document.body.appendChild(renderer.domElement);
+
+    const loadObjects = () => {
+      loader.load("/assets/hover/cicapairHover2.glb", (gltf) => {
+        object1 = gltf.scene;
+        object1.scale.set(0.1, 0.1, 0.1);
+        object1.position.set(0, -2, 0);
+        object1.rotation.y = Math.PI / 1;
+        group.add(object1);
+        scene.add(new THREE.AxesHelper(2));
+        console.log("Loaded object1:", object1);
+        objectsLoadedRef.current.object1 = true;
+        checkAllObjectsLoaded();
+      });
+
+      loader.load("/assets/hover/product1.glb", (gltf) => {
+        object2 = gltf.scene;
+        object2.scale.set(0.7, 0.7, 0.7);
+        object2.position.set(5, -4, -2);
+        object2.rotation.y = Math.PI / -4;
+        group.add(object2);
+        object2.add(new THREE.AxesHelper(2));
+        console.log("Loaded object2:", object2);
+        objectsLoadedRef.current.object2 = true;
+        checkAllObjectsLoaded();
+      });
+
+      loader.load("/assets/hover/product1.glb", (gltf) => {
+        object3 = gltf.scene;
+        object3.scale.set(0.7, 0.7, 0.7);
+        object3.position.set(-4, -4, -2);
+        object3.rotation.y = Math.PI / -4;
+        group.add(object3);
+        object3.add(new THREE.AxesHelper(2));
+        console.log("Loaded object3:", object3);
+        objectsLoadedRef.current.object3 = true;
+        checkAllObjectsLoaded();
+      });
+
+      loader.load("/assets/hover/product1.glb", (gltf) => {
+        object4 = gltf.scene;
+        object4.scale.set(0.7, 0.7, 0.7);
+        object4.position.set(0, -4, -2);
+        object4.rotation.y = Math.PI / -4;
+        group.add(object4);
+        object4.add(new THREE.AxesHelper(2));
+        console.log("Loaded object4:", object4);
+        objectsLoadedRef.current.object4 = true;
+        checkAllObjectsLoaded();
+      });
+    };
+
+    const checkAllObjectsLoaded = () => {
+      const { object1, object2, object3, object4 } = objectsLoadedRef.current;
+      if (object1 && object2 && object3 && object4) {
+        setTimeout(() => {
+          startCollisionCheckRef.current = true;
+        }, 1000);
+        initializeDragControls();
+      }
+    };
 
     /************
      * Check Collision
      ***********/
     let collisionDetected = false;
 
-    const computeBoundingSphere = (object) => {
+    const computeBoundingBox = (object) => {
       if (!object) return null;
-
-      const sphere = new THREE.Sphere();
-      object.traverse((child) => {
-        if (child.isMesh) {
-          child.geometry.computeBoundingSphere();
-          const childSphere = child.geometry.boundingSphere
-            .clone()
-            .applyMatrix4(child.matrixWorld);
-          sphere.union(childSphere);
-        }
-      });
-      return sphere;
+      const box = new THREE.Box3().setFromObject(object);
+      return box;
     };
 
     const checkCollision = () => {
@@ -123,22 +132,22 @@ const Game = () => {
         object1: loaded1,
         object2: loaded2,
         object3: loaded3,
+        object4: loaded4,
       } = objectsLoadedRef.current;
-      if (!loaded1 || !loaded2 || !loaded3) return;
+      if (!loaded1 || !loaded2 || !loaded3 || !loaded4) return;
 
-      const sphere1 = computeBoundingSphere(object1);
-      const sphere2 = computeBoundingSphere(object2);
-      const sphere3 = computeBoundingSphere(object3);
+      const box1 = computeBoundingBox(object1);
+      const box2 = computeBoundingBox(object2);
+      const box3 = computeBoundingBox(object3);
+      const box4 = computeBoundingBox(object4);
 
-      if (!sphere1 || !sphere2 || !sphere3) return;
+      if (!box1 || !box2 || !box3 || !box4) return;
 
-      const distance12 = sphere1.center.distanceTo(sphere2.center);
-      const sumOfRadii12 = sphere1.radius + sphere2.radius;
-
-      const distance13 = sphere1.center.distanceTo(sphere3.center);
-      const sumOfRadii13 = sphere1.radius + sphere3.radius;
-
-      if (distance12 <= sumOfRadii12 || distance13 <= sumOfRadii13) {
+      if (
+        box1.intersectsBox(box2) ||
+        box1.intersectsBox(box3) ||
+        box1.intersectsBox(box4)
+      ) {
         handleCollision();
       }
     };
@@ -169,39 +178,36 @@ const Game = () => {
     /************
      * DRAG CONTROLS
      ***********/
-    const initializeDragControls = () => {
-      if (!object2 || !object3 || controls) return;
+    function initializeDragControls() {
+      if (!object2 || !object3 || !object4) return;
 
-      controls = new DragControls(
-        [object2, object3],
+      const draggableObjects = [object2, object3, object4];
+
+      const dragControls = new DragControls(
+        draggableObjects,
         camera,
         renderer.domElement
       );
 
-      controls.addEventListener("dragstart", function (event) {
+      dragControls.addEventListener("dragstart", function (event) {
         console.log("Drag started", event.object);
       });
 
-      controls.addEventListener("dragend", function (event) {
+      dragControls.addEventListener("dragend", function (event) {
         console.log("Drag ended", event.object);
+        checkCollision(); // Check collision after dragging ends
       });
+    }
 
-      controls.addEventListener("drag", function (event) {
-        const deltaX = event.object.position.x + event.deltaX / 100;
-        const deltaY = event.object.position.y + event.deltaY / 100;
-        event.object.position.set(deltaX, deltaY, event.object.position.z);
-      });
-    };
-
-    // LIGHTS
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    /************
+     * LIGHTS
+     ***********/
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
     scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(1, 1, 1);
-
     scene.add(directionalLight);
     scene.add(camera);
-
     loadObjects();
 
     return () => {
@@ -213,7 +219,6 @@ const Game = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="webgl" />
-      <div id="punten">Score: {scoreRef.current}</div>
       <div ref={messageRef} id="message" style={{ color: "red" }}></div>
     </div>
   );
