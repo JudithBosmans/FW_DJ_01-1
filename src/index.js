@@ -10,6 +10,7 @@ import Avatar from "./components/Avatar.js";
 import Overview from "./components/Overview.js";
 import Specification from "./components/Specification.js";
 import Game from "./components/Game.js";
+import PicAvatar from "./components/PicAvatar.js";
 
 import Test from "./components/Test.js";
 import Test02 from "./components/Test02.js";
@@ -35,14 +36,20 @@ const router = createBrowserRouter([
     element: <Specification />,
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/Test",
-    element: <Test />,
-    errorElement: <ErrorPage />,
-  },
+
   {
     path: "/Game",
     element: <Game />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/PicAvatar",
+    element: <PicAvatar />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/Test",
+    element: <Test />,
     errorElement: <ErrorPage />,
   },
   {

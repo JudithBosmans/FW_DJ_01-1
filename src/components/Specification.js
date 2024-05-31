@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import "../styles/Specification.css";
 import { useLocation } from "react-router-dom";
-
-import { specificationData } from "./Select.ts";
-import { Link } from "react-router-dom";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 //01 JUNGLE
@@ -27,13 +30,11 @@ const Specification = () => {
     justifyContent: "center",
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const canvas = ref.current;
     if (canvas) {
-      console.log("Canvas is available");
       const ctx = canvas.getContext("2d");
-      if (ctx) {
-      } else {
+      if (!ctx) {
         console.error("Failed to get 2D context.");
       }
     } else {
@@ -58,16 +59,15 @@ const Specification = () => {
   useEffect(() => {
     const handleResize = () => {
       const canvas = ref.current;
-      if (!canvas) {
+      if (canvas) {
+        const scale = window.devicePixelRatio;
+        canvas.style.width = "80vw";
+        canvas.width = canvas.offsetWidth * scale;
+        canvas.height = canvas.offsetHeight * scale;
+        console.log("Canvas resized");
+      } else {
         console.error("Canvas element is not available.");
-        return;
       }
-
-      const scale = window.devicePixelRatio;
-      canvas.style.width = "80vw";
-      canvas.width = canvas.offsetWidth * scale;
-      canvas.height = canvas.offsetHeight * scale;
-      console.log("Canvas resized");
     };
 
     handleResize();
@@ -95,14 +95,13 @@ const Specification = () => {
       const img = new Image();
       img.onload = () => handleImageLoad(img, i);
       img.onerror = () => console.error(`Failed to load image ${i + 1}`);
-      img.src = `/assets/cica/${i + 1}.webp`; 
+      img.src = `/assets/cica/${i + 1}.webp`;
     }
   }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
-    layoutEffect: true,
   });
 
   const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 249]);
@@ -148,7 +147,7 @@ const Specification = () => {
   }
 
   return (
-    <div>
+    <div style={{ height: "200vh", overflow: "auto" }}>
       <Parallax pages={3} className="parallax_container">
         <ParallaxLayer
           offset={0}
@@ -217,6 +216,7 @@ const Specification = () => {
         style={{
           height: containerHeight,
           overflow: "auto",
+          position: "relative",
         }}
       >
         <div className="tab_container">

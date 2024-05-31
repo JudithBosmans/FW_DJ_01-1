@@ -143,19 +143,27 @@ const Game = () => {
 
       if (!box1 || !box2 || !box3 || !box4) return;
 
-      if (
-        box1.intersectsBox(box2) ||
-        box1.intersectsBox(box3) ||
-        box1.intersectsBox(box4)
-      ) {
-        handleCollision();
+      if (box1.intersectsBox(box2)) {
+        handleCollision(object2);
+      } else if (box1.intersectsBox(box3)) {
+        handleCollision(object3);
+      } else if (box1.intersectsBox(box4)) {
+        handleCollision(object4);
       }
     };
 
-    const handleCollision = () => {
+    const handleCollision = (collidingObject) => {
       if (!collisionDetected) {
         collisionDetected = true;
-        showMessage("Cats hit the cicapot!");
+        let message = "";
+        if (collidingObject === object2) {
+          message = "Object 2 hit object 1!";
+        } else if (collidingObject === object3) {
+          message = "Object 3 hit object 1!";
+        } else if (collidingObject === object4) {
+          message = "Object 4 hit object 1!";
+        }
+        showMessage(message);
       }
     };
 
@@ -195,7 +203,7 @@ const Game = () => {
 
       dragControls.addEventListener("dragend", function (event) {
         console.log("Drag ended", event.object);
-        checkCollision(); // Check collision after dragging ends
+        checkCollision();
       });
     }
 
@@ -219,7 +227,7 @@ const Game = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="webgl" />
-      <div ref={messageRef} id="message" style={{ color: "red" }}></div>
+      <div ref={messageRef} id="message" style={{ color: "pink" }}></div>
     </div>
   );
 };
