@@ -6,6 +6,10 @@ import cicaProduct from "../pics/01/untitled.png";
 import ceraProduct from "../pics/02/cera.png";
 import cryoProduct from "../pics/03/cryo.png";
 
+import ceraBackground from "../pics/ceraRef/ceraBackground.png";
+import cicaBackground from "../pics/cicaRef/cica_background.png";
+import cryoBackground from "../pics/cryoRef/cryoRef.png";
+
 export interface Ingredient {
   icon: string;
   label: string;
@@ -68,5 +72,39 @@ export const specificationData = [
     details: "Cryo Rubber is a cooling mask...",
     products: ["Algae Extract", "Allantoin", "Collagen"],
     usage: "Apply after cleansing, leave on for 15-20 minutes.",
+  },
+];
+
+export const dynoGameData = [
+  {
+    icon: "🐯",
+    label: "Cicapair",
+    title: "Cicapair™ Tiger Grass Color Correcting Treatment",
+    background: cicaBackground,
+    buttonLink: "/Specification",
+    ingredient1: "Ingredient 1 does not belong for this reason",
+    ingredient2: "Ingredient 2 does not belong for this reason",
+    ingredient3:
+      "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
+  },
+  {
+    icon: "🧊",
+    label: "Ceramidin",
+    text: "Ceramidin™ Skin Barrier Moisturizing Cream",
+    background: ceraBackground,
+    ingredient1: "Ingredient 1 does not belong for this reason",
+    ingredient2: "Ingredient 2 does not belong for this reason",
+    ingredient3:
+      "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
+  },
+  {
+    icon: "❄️",
+    label: "Cryo Rubber",
+    text: "Cryo Rubber™Moisturizing Mask",
+    background: cryoBackground,
+    ingredient1: "Ingredient 1 does not belong for this reason",
+    ingredient2: "Ingredient 2 does not belong for this reason",
+    ingredient3:
+      "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
   },
 ];

@@ -1,20 +1,15 @@
 .Overview_container {
-  margin: 0%;
+  margin: 0;
   padding: 0;
+  height: 200vh;
 
   overflow: auto;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
 }
 
 .canvasStyle {
   display: block;
   margin: 0 auto;
-}
-
-.tab_container {
-  z-index: 999;
 }

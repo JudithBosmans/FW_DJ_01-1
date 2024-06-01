@@ -1,0 +1,17 @@
+h1 {
+  color: black;
+}
+
+.buttonPic {
+  z-index: 99;
+}
+
+.AvatarPic {
+  position: relative;
+  z-index: 1;
+}
+
+.AvatarPic .Test {
+  margin: 100% 3% 0% 0%;
+  z-index: 1;
+}

@@ -1,12 +1,12 @@
 import React from "react";
-import Test from "./Test";
+import AvatarLoad from "./AvatarLoad";
 
-const Test02 = () => {
+const AvatarLoad02 = () => {
   return (
     <div style={{ position: "relative", width: "100%", height: "100vh" }}>
-      <Test />
+      <AvatarLoad />
     </div>
   );
 };
 
-export default Test02;
+export default AvatarLoad02;

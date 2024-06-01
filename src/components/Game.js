@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
@@ -27,8 +28,8 @@ const Game = () => {
     scene.add(group);
 
     let object1, object2, object3, object4;
-    let camera, renderer;
-
+    let camera;
+    // , renderer
     /************
      * SIZES
      ***********/
@@ -46,13 +47,11 @@ const Game = () => {
     /************
      * CANVAS & RENDERER
      ***********/
-    renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0);
-    document.body.appendChild(renderer.domElement);
 
     const loadObjects = () => {
       loader.load("/assets/hover/cicapairHover2.glb", (gltf) => {
@@ -225,7 +224,10 @@ const Game = () => {
   }, []);
 
   return (
-    <div>
+    <div className="game-container">
+      <Link to="/PicAvatar" className="buttonNext">
+        PicAvatar
+      </Link>
       <canvas ref={canvasRef} className="webgl" />
       <div ref={messageRef} id="message" style={{ color: "pink" }}></div>
     </div>

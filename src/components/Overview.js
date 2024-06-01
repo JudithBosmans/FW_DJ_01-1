@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Test from "./Test.js";
+import AvatarLoad from "./AvatarLoad.js";
 
 import { initialTabs as tabs } from "./Select.ts";
 import { motion, AnimatePresence } from "framer-motion";
@@ -99,7 +99,7 @@ const Overview = () => {
             zIndex: 10,
           }}
         >
-          <Test />
+          <AvatarLoad />
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -201,7 +201,7 @@ const Overview = () => {
             zIndex: 98,
           }}
         >
-          <Test />
+          <AvatarLoad />
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -304,7 +304,7 @@ const Overview = () => {
             zIndex: 10,
           }}
         >
-          <Test />
+          <AvatarLoad />
         </ParallaxLayer>
 
         <ParallaxLayer

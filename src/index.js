@@ -12,7 +12,7 @@ import Specification from "./components/Specification.js";
 import Game from "./components/Game.js";
 import PicAvatar from "./components/PicAvatar.js";
 
-import Test from "./components/Test.js";
+import AvatarLoad from "./components/AvatarLoad.js";
 import Test02 from "./components/Test02.js";
 
 const router = createBrowserRouter([
@@ -48,8 +48,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/Test",
-    element: <Test />,
+    path: "/AvatarLoad",
+    element: <AvatarLoad />,
     errorElement: <ErrorPage />,
   },
   {

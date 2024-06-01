@@ -14,4 +14,15 @@ canvas.webgl {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
+}
+
+.buttonNext {
+  position: absolute;
+  z-index: 10;
+  background-color: #d21eb1;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #ffffff;
 }
