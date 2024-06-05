@@ -81,10 +81,12 @@ export const dynoGameData = [
     label: "Cicapair",
     title: "Cicapair™ Tiger Grass Color Correcting Treatment",
     background: cicaBackground,
-    buttonLink: "/Specification",
-    ingredient1: "Ingredient 1 does not belong for this reason",
-    ingredient2: "Ingredient 2 does not belong for this reason",
-    ingredient3:
+    ingredient1: "Centella Asiatica Leaf Water",
+    ingredient2: "Hyaluronic Acid",
+    ingredient3: "Ceramide Np",
+    ingredient1Explanation: "Ingredient 1 does not belong for this reason",
+    ingredient2Explanation: "Ingredient 2 does not belong for this reason",
+    ingredient3Explanation:
       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
   },
   {
@@ -92,9 +94,12 @@ export const dynoGameData = [
     label: "Ceramidin",
     text: "Ceramidin™ Skin Barrier Moisturizing Cream",
     background: ceraBackground,
-    ingredient1: "Ingredient 1 does not belong for this reason",
-    ingredient2: "Ingredient 2 does not belong for this reason",
-    ingredient3:
+    ingredient1: "Centella Asiatica Leaf Water",
+    ingredient2: "Hyaluronic Acid",
+    ingredient3: "Ceramide Np",
+    ingredient1Explanation: "Ingredient 1 does not belong for this reason",
+    ingredient2Explanation: "Ingredient 2 does not belong for this reason",
+    ingredient3Explanation:
       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
   },
   {
@@ -102,9 +107,12 @@ export const dynoGameData = [
     label: "Cryo Rubber",
     text: "Cryo Rubber™Moisturizing Mask",
     background: cryoBackground,
-    ingredient1: "Ingredient 1 does not belong for this reason",
-    ingredient2: "Ingredient 2 does not belong for this reason",
-    ingredient3:
+    ingredient1: "Centella Asiatica Leaf Water",
+    ingredient2: "Hyaluronic Acid",
+    ingredient3: "Ceramide Np",
+    ingredient1Explanation: "Ingredient 1 does not belong for this reason",
+    ingredient2Explanation: "Ingredient 2 does not belong for this reason",
+    ingredient3Explanation:
       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
   },
 ];

@@ -4,7 +4,6 @@ import AvatarLoad from "./AvatarLoad.js";
 
 import { initialTabs as tabs } from "./Select.ts";
 import { motion, AnimatePresence } from "framer-motion";
-import Typewriter from "typewriter-effect";
 
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import "../styles/Overview.css";
@@ -76,16 +75,7 @@ const Overview = () => {
             zIndex: 11,
           }}
         >
-          <Typewriter
-            options={{
-              strings: [
-                "Legend goes tigers rolled in Tiger Grass when wounded.",
-              ],
-              autoStart: true,
-              loop: true,
-              pauseFor: 3000,
-            }}
-          />
+          <h1>Legend goes tigers rolled in Tiger Grass when wounded.</h1>
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -179,15 +169,7 @@ const Overview = () => {
             zIndex: 99,
           }}
         >
-          <Typewriter
-            className="typewriter"
-            options={{
-              strings: ["Or have you heard yet of Cryo-Rubber technology?"],
-              autoStart: true,
-              loop: true,
-              pauseFor: 3000,
-            }}
-          />
+          <h1>Or have you heard yet of Cryo-Rubber technology?</h1>
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -281,16 +263,9 @@ const Overview = () => {
             zIndex: 11,
           }}
         >
-          <Typewriter
-            options={{
-              strings: [
-                "Or are you passionate about the protecting properties of ceramides?",
-              ],
-              autoStart: true,
-              loop: true,
-              pauseFor: 3000,
-            }}
-          />
+          <h1>
+            Or are you passionate about the protecting properties of ceramides?
+          </h1>
         </ParallaxLayer>
 
         <ParallaxLayer

@@ -45,7 +45,6 @@ const App = () => {
     ***************
     *************/}
       <ParallaxLayer
-        // sticky={{ start: 0, end: 4 }}
         offset={0}
         speed={2}
         factor={2}
@@ -254,6 +253,19 @@ const App = () => {
 
       <ParallaxLayer
         offset={1.7}
+        speed={1}
+        factor={1}
+        className="Snow_background_02"
+        style={{
+          border: "none",
+          backgroundImage: `url(${Snow_01})`,
+          backgroundSize: `cover`,
+          zIndex: 1,
+        }}
+      />
+
+      <ParallaxLayer
+        offset={1}
         speed={1}
         factor={1}
         className="Snow_background_02"

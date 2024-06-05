@@ -228,7 +228,7 @@ const Game = () => {
       <Link to="/PicAvatar" className="buttonNext">
         PicAvatar
       </Link>
-      <canvas ref={canvasRef} className="webgl" />
+      <canvas ref={canvasRef} className="webgl"></canvas>
       <div ref={messageRef} id="message" style={{ color: "pink" }}></div>
     </div>
   );

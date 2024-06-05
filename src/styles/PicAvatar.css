@@ -4,14 +4,52 @@ h1 {
 
 .buttonPic {
   z-index: 99;
+  transition: opacity 0.3s ease;
 }
 
-.AvatarPic {
+.Container {
   position: relative;
-  z-index: 1;
+  text-align: center;
+  padding: 20px;
 }
 
-.AvatarPic .Test {
-  margin: 100% 3% 0% 0%;
-  z-index: 1;
+.avatarContainer {
+  position: absolute;
+  margin: 10% 0% 0% -60%;
+  z-index: 0;
+}
+
+.Avatar_button {
+  z-index: 999;
+}
+
+.modalBackground {
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.modalContent {
+  padding: 20px;
+  background-color: pink;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  overflow: auto;
+  z-index: 99;
+
+  width: 60%;
+}
+
+.modalImage {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  z-index: 99;
+}
+
+.downloadButton {
+  z-index: 999;
 }
