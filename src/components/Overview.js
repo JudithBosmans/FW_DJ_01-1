@@ -42,8 +42,10 @@ const Overview = () => {
     justifyContent: "center",
   };
 
+  console.log("Selected Tab:", selectedTab);
   const handleTabClick = (item) => {
     setSelectedTab(item);
+    localStorage.setItem("selectedProductLabel", item.label);
   };
 
   return (
@@ -378,11 +380,7 @@ const Overview = () => {
                       src={selectedTab.productShot}
                       alt="Dynamic-Background"
                     />
-                    <Link
-                      to={selectedTab.buttonLink}
-                      state={{ tab: selectedTab }}
-                      className="link_button"
-                    >
+                    <Link to="/specification" className="link_button">
                       <div className="Select_button">
                         <p className="button_text">CHOOSE</p>
                       </div>

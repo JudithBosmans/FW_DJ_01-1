@@ -1,236 +1,94 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
-import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import React, { useMemo, useRef, useEffect } from "react";
+import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useLocation, Link } from "react-router-dom";
+import { allProducts } from "./Select.ts";
 
-const Specification = () => {
-  const ref = useRef(null);
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const location = useLocation();
-  const [containerHeight, setContainerHeight] = useState("150vh");
-  const [canvasReady, setCanvasReady] = useState(false);
+function Specification() {
+  // const imageRef = useRef(null);
 
-  useEffect(() => {
-    if (ref.current) {
-      const ctx = ref.current.getContext("2d");
-      if (!ctx) {
-        console.error("Failed to get 2D context.");
-      } else {
-        console.log("2D context available.");
-        setCanvasReady(true);
-      }
-    } else {
-      console.error("Canvas element is not available.");
-    }
-  }, []);
+  // const { scrollYProgress } = useScroll({
+  //   target: imageRef,
+  //   offset: ["start end", "end start"],
+  // });
 
-  useEffect(() => {
-    function updateContainerHeight() {
-      const screenHeight = window.innerHeight;
-      setContainerHeight(`${screenHeight + screenHeight / 2}px`);
-    }
+  // const images = useMemo(() => {
+  //   return Array.from({ length: 86 }, (_, i) => `/assets/cica/${i + 1}.webp`);
+  // }, []);
 
-    updateContainerHeight();
-    window.addEventListener("resize", updateContainerHeight);
+  // const currentIndex = useTransform(
+  //   scrollYProgress,
+  //   [0, 1],
+  //   [0, images.length - 1]
+  // );
 
-    return () => {
-      window.removeEventListener("resize", updateContainerHeight);
-    };
-  }, []);
+  // useMotionValueEvent(currentIndex, "change", (latest) => {
+  //   const imageElement = imageRef.current;
+  //   if (imageElement) {
+  //     imageElement.src = images[Math.round(latest)];
+  //   }
+  // });
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (ref.current) {
-        const canvas = ref.current;
-        const scale = window.devicePixelRatio;
-        canvas.style.width = "80vw";
-        canvas.width = canvas.offsetWidth * scale;
-        canvas.height = canvas.offsetHeight * scale;
-        console.log("Canvas resized");
-      } else {
-        console.error("Canvas element is not available.");
-      }
-    };
+  // useEffect(() => {
+  //   if (imageRef.current) {
+  //     imageRef.current.src = images[0];
+  //   }
+  // }, [images]);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const loadedImages = new Array(250);
-    let imagesLoaded = 0;
-
-    for (let i = 0; i < 250; i++) {
-      const img = new Image();
-      img.onload = () => {
-        loadedImages[i] = img;
-        imagesLoaded++;
-        if (imagesLoaded === 250) {
-          setImages(loadedImages);
-          setLoading(false);
-        }
-      };
-      img.onerror = () => console.error(`Failed to load image ${i + 1}`);
-      img.src = `/assets/cica/${i + 1}.webp`;
-    }
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: canvasReady ? ref : null,
-    offset: ["start start", "end end"],
-    layoutEffect: false,
-  });
-
-  const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 249]);
-
-  const render = useCallback(
-    (index) => {
-      if (ref.current && images[index]) {
-        const ctx = ref.current.getContext("2d");
-        if (ctx) {
-          ctx.clearRect(0, 0, ref.current.width, ref.current.height);
-          const img = images[index];
-          const scale = Math.min(
-            ref.current.width / img.width,
-            ref.current.height / img.height
-          );
-          const x = (ref.current.width - img.width * scale) / 2;
-          const y = (ref.current.height - img.height * scale) / 2;
-          ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-        }
-      }
-    },
-    [images]
-  );
-
-  useMotionValueEvent(currentIndex, "change", (latest) => {
-    render(Math.floor(latest));
-  });
-
-  if (loading) {
-    return <div>Loading images...</div>;
+  const label = localStorage.getItem("selectedProductLabel");
+  const product = allProducts.find((p) => p.label === label);
+  if (!product) {
+    return (
+      <div>Product data not found. Please go back and select a product.</div>
+    );
   }
 
+  localStorage.setItem("currentProductData", JSON.stringify(product));
+
   return (
-    <div
-      className="Overview_container"
-      style={{
-        height: containerHeight,
-        overflow: "auto",
-        position: "relative",
-      }}
-    >
-      <canvas
-        ref={ref}
-        className="canvasStyle"
-        style={{ border: "1px solid red", width: "80vw", height: "80vh" }}
-      ></canvas>
-    </div>
+    <>
+      <div>
+        <Link to="/Game" className="buttonNext">
+          Game
+        </Link>
+        <h1>{product.text}</h1>
+        <img
+          src={product.backgroundImage}
+          alt={product.label}
+          style={{ width: "100%" }}
+        />
+        <div>
+          <h2>Details:</h2>
+          <p>{product.details}</p>
+          <h3>Usage:</h3>
+          <p>{product.usage}</p>
+          <h3>Key Ingredients:</h3>
+          <ul>
+            {product.products.map((ingredient) => (
+              <li key={ingredient}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {/* <div
+        className="SpecificationContainer"
+        style={{
+          height: "6000px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+        <div style={{ height: "3000px" }} /> */}
+      {/* <img
+        alt="Scroll-driven image"
+        width={1000}
+        height={1000}
+        // ref={imageRef}
+      /> 
+      </div>*/}
+    </>
   );
-};
+}
 
 export default Specification;
-
-//  const Specification = () => {
-//    const ref = useRef(null);
-//    const [images, setImages] = useState([]);
-//    const [loading, setLoading] = useState(true);
-//    const [containerHeight, setContainerHouse] = useState("150vh");
-//    const [isCanvasReady, setIsCanvasReady] = useState(false);
-
-//    useEffect(() => {
-//      setIsCanvasReady(!!ref.current);
-//    }, [ref.current]);
-
-//    useEffect(() => {
-//      if (!ref.current) {
-//        console.log("Canvas not yet available");
-//        return;
-//      }
-
-//      const canvas = ref.current;
-//      const ctx = canvas.getContext("2d");
-//      if (!ctx) {
-//        console.error("Failed to get 2D context.");
-//        return;
-//      }
-
-//      const handleResize = () => {
-//        const scale = window.devicePixelRatio;
-//        canvas.style.width = "80vw";
-//        canvas.width = canvas.offsetWidth * scale;
-//        canvas.height = canvas.offsetHeight * scale;
-//        console.log("Canvas resized");
-//      };
-
-//      handleResize();
-//      window.addEventListener("resize", handleResize);
-
-//      return () => window.removeEventListener("resize", handleResize);
-//    }, [isCanvasReady]);  Dependency on the canvas readiness
-
-//     Ensure all elements and states are set before using useScroll
-//    const scroll = useScroll({
-//      target: isCanvasReady ? ref : undefined,
-//      offset: ["start start", "end end"],
-//      layoutEffect: false,
-//    });
-
-//    const scrollYProgress = scroll.scrollYProgress;
-//    const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 249]);
-
-//    const render = useCallback(
-//      (index) => {
-//        if (!ref.current) {
-//          console.error("Canvas element is not available.");
-//          return;
-//        }
-
-//        const ctx = ref.current.getContext("2d");
-//        if (!ctx) {
-//          console.error("Failed to get 2D context.");
-//          return;
-//        }
-
-//        if (images[index]) {
-//          ctx.clearRect(0, 0, ref.current.width, ref.current.height);
-//          const img = images[index];
-//          const scale = Math.min(
-//            ref.current.width / img.width,
-//            ref.current.height / img.height
-//          );
-//          const x = (ref.current.width - img.width * scale) / 2;
-//          const y = (ref.current.height - img.height * scale) / 2;
-//          ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-//        }
-//      },
-//      [images]
-//    );
-
-//    useMotionValueEvent(currentIndex, "change", (latest) =>
-//      render(Math.floor(latest))
-//    );
-
-//    if (loading) {
-//      return <div>Loading images...</div>;
-//    }
-
-//    return (
-//      <div
-//        className="Overview_container"
-//        style={{
-//          height: containerHeight,
-//          overflow: "auto",
-//          position: "relative",
-//        }}
-//      >
-//        <canvas
-//          ref={ref}
-//          className="canvasStyle"
-//          style={{ border: "1px solid red", width: "80vw", height: "80vh" }}
-//        ></canvas>
-//      </div>
-//    );
-//  };
-
-//  export default Specification;

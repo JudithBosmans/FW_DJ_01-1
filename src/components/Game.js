@@ -8,6 +8,9 @@ import "../styles/Game.css";
 const Game = () => {
   const canvasRef = useRef();
   const messageRef = useRef();
+  const productData = JSON.parse(
+    localStorage.getItem("currentProductData") || "{}"
+  );
 
   const objectsLoadedRef = useRef({
     object1: false,
@@ -223,8 +226,16 @@ const Game = () => {
     };
   }, []);
 
+  if (!productData || Object.keys(productData).length === 0) {
+    return (
+      <div>No product data found. Please go back and select a product.</div>
+    );
+  }
+
   return (
     <div className="game-container">
+      <h1>{productData.title}</h1>
+      <p>{productData.details}</p>
       <Link to="/PicAvatar" className="buttonNext">
         PicAvatar
       </Link>
