@@ -374,17 +374,20 @@ const Overview = () => {
                     transition={{ duration: 0.2 }}
                     className="selected-content"
                   >
-                    {selectedTab ? selectedTab.text : "Text"}
                     <img
                       className="productImg"
                       src={selectedTab.productShot}
                       alt="Dynamic-Background"
                     />
-                    <Link to="/specification" className="link_button">
-                      <div className="Select_button">
-                        <p className="button_text">CHOOSE</p>
-                      </div>
-                    </Link>
+                    <div className="info-section">
+                      {selectedTab ? selectedTab.text : "Text"}
+
+                      <Link to="/specification" className="link_button">
+                        <div className="Select_button">
+                          <p className="button_text">CHOOSE</p>
+                        </div>
+                      </Link>
+                    </div>
                   </motion.div>
                 </AnimatePresence>
               </main>

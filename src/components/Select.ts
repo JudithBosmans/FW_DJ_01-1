@@ -6,9 +6,11 @@ import cicaProduct from "../pics/01/untitled.png";
 import ceraProduct from "../pics/02/cera.png";
 import cryoProduct from "../pics/03/cryo.png";
 
-import cicaBackground from "../pics/01/01_Jungle_Back.png";
-import ceraBackground from "../pics/02/Ice_background.png";
-import cryoBackground from "../pics/03/03_Snow_Background.png";
+import cicaBackground from "../pics/cicaRef/cica_background.png";
+import ceraBackground from "../pics/ceraRef/ceraBackground.png";
+import cryoBackground from "../pics/cryoRef/cryoRef.png";
+
+const cicaImage = `${(process.env.PUBLIC, URL)}/assets/cica/image1.webp`;
 
 export interface Ingredient {
   icon: string;
@@ -22,6 +24,7 @@ export const allProducts = [
     icon: "🐯",
     label: "Cicapair",
     text: "Cicapair™ Tiger Grass Color Correcting Treatment",
+    productLink: cicaImage,
     productShot: cicaProduct,
     backgroundImage: jungleImage,
     picImage: cicaBackground,
@@ -29,11 +32,13 @@ export const allProducts = [
     details: "Cicapair is a soothing treatment...",
     products: ["Centella Asiatica", "Niacinamide", "Glycerin"],
     usage: "Apply to clean skin, day and night.",
+    GameIngredient: "../pics/product1.glb",
   },
   {
     icon: "🧊",
     label: "Ceramidin",
     text: "Ceramidin™ Skin Barrier Moisturizing Cream",
+    productLink: "/assets/cera/",
     productShot: ceraProduct,
     backgroundImage: iceImage,
     picImage: ceraBackground,
@@ -41,6 +46,7 @@ export const allProducts = [
     details: "Ceramidin is a moisture barrier strengthening cream...",
     products: ["Ceramides", "Panthenol", "Shea Butter"],
     usage: "Apply evenly to face and neck.",
+    GameIngredient: "../pics/product1.glb",
   },
   {
     icon: "❄️",
@@ -53,6 +59,7 @@ export const allProducts = [
     details: "Cryo Rubber is a cooling mask...",
     products: ["Algae Extract", "Allantoin", "Collagen"],
     usage: "Apply after cleansing, leave on for 15-20 minutes.",
+    GameIngredient: "../pics/product1.glb",
   },
 ];
 
@@ -89,45 +96,3 @@ export const specificationData = [
     usage: "Apply after cleansing, leave on for 15-20 minutes.",
   },
 ];
-
-// export const dynoGameData = [
-//   {
-//     icon: "🐯",
-//     label: "Cicapair",
-//     title: "Cicapair™ Tiger Grass Color Correcting Treatment",
-//     background: cicaBackground,
-//     ingredient1: "Centella Asiatica Leaf Water",
-//     ingredient2: "Hyaluronic Acid",
-//     ingredient3: "Ceramide Np",
-//     ingredient1Explanation: "Ingredient 1 does not belong for this reason",
-//     ingredient2Explanation: "Ingredient 2 does not belong for this reason",
-//     ingredient3Explanation:
-//       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
-//   },
-//   {
-//     icon: "🧊",
-//     label: "Ceramidin",
-//     text: "Ceramidin™ Skin Barrier Moisturizing Cream",
-//     background: ceraBackground,
-//     ingredient1: "Centella Asiatica Leaf Water",
-//     ingredient2: "Hyaluronic Acid",
-//     ingredient3: "Ceramide Np",
-//     ingredient1Explanation: "Ingredient 1 does not belong for this reason",
-//     ingredient2Explanation: "Ingredient 2 does not belong for this reason",
-//     ingredient3Explanation:
-//       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
-//   },
-//   {
-//     icon: "❄️",
-//     label: "Cryo Rubber",
-//     text: "Cryo Rubber™Moisturizing Mask",
-//     background: cryoBackground,
-//     ingredient1: "Centella Asiatica Leaf Water",
-//     ingredient2: "Hyaluronic Acid",
-//     ingredient3: "Ceramide Np",
-//     ingredient1Explanation: "Ingredient 1 does not belong for this reason",
-//     ingredient2Explanation: "Ingredient 2 does not belong for this reason",
-//     ingredient3Explanation:
-//       "Congrats, ingredient 3 is the main ingredient in this product because of its x properties",
-//   },
-// ];

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
+
 import "../styles/Game.css";
 
 const Game = () => {
@@ -69,23 +70,27 @@ const Game = () => {
         checkAllObjectsLoaded();
       });
 
-      loader.load("/assets/hover/product1.glb", (gltf) => {
-        object2 = gltf.scene;
-        object2.scale.set(0.7, 0.7, 0.7);
-        object2.position.set(5, -4, -2);
-        object2.rotation.y = Math.PI / -4;
-        group.add(object2);
-        object2.add(new THREE.AxesHelper(2));
-        console.log("Loaded object2:", object2);
-        objectsLoadedRef.current.object2 = true;
-        checkAllObjectsLoaded();
-      });
+      if (productData.GameAngredient) {
+        loader.load(productData.GameIngredient, (gltf) => {
+          object2 = gltf.scene;
+          object2.scale.set(0.7, 0.7, 0.7);
+          object2.position.set(5, -4, -2);
+          object2.rotation.y = Math.PI / -4;
+          group.add(object2);
+          object2.add(new THREE.AxesHelper(2));
+          console.log("Loaded object2:", object2);
+          objectsLoadedRef.current.object2 = true;
+          checkAllObjectsLoaded();
+        });
+      } else {
+        console.error("GameIngredient path is undefined!");
+      }
 
       loader.load("/assets/hover/product1.glb", (gltf) => {
         object3 = gltf.scene;
         object3.scale.set(0.7, 0.7, 0.7);
-        object3.position.set(-4, -4, -2);
-        object3.rotation.y = Math.PI / -4;
+        object3.position.set(-5, -4, -2);
+        object3.rotation.y = Math.PI / 4;
         group.add(object3);
         object3.add(new THREE.AxesHelper(2));
         console.log("Loaded object3:", object3);
@@ -239,7 +244,15 @@ const Game = () => {
       <Link to="/PicAvatar" className="buttonNext">
         PicAvatar
       </Link>
-      <canvas ref={canvasRef} className="webgl"></canvas>
+      <canvas
+        ref={canvasRef}
+        className="webgl"
+        style={{
+          backgroundImage: `url(${productData.backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      ></canvas>
       <div ref={messageRef} id="message" style={{ color: "pink" }}></div>
     </div>
   );

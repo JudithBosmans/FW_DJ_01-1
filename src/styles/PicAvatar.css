@@ -1,15 +1,29 @@
-h1 {
-  color: black;
+.titlePic {
+  color: white;
+}
+
+.buttonPic img {
+  width: 100px;
+  text-decoration: none;
 }
 
 .buttonPic {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 99;
+  background: none;
+  border: none;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .Container {
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vh;
 
@@ -24,15 +38,24 @@ h1 {
   align-items: center;
 }
 
-.logoPic {
-  width: 30%;
-  margin: -30% 0% 0% 0%;
+.logoStyle {
+  align-self: start;
+  margin-top: -20%;
+}
+
+.logoStyle img {
+  width: 35%;
 }
 
 .avatarContainer {
   position: absolute;
-  margin: 50% 0% 0% 30%;
   z-index: 0;
+
+  top: 85vh;
+  left: 70vw;
+  transform: translate(-50%, -50%);
+
+  padding: 20px;
 }
 
 .Avatar_button {
@@ -64,7 +87,7 @@ h1 {
 }
 
 .modalImage {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   margin-bottom: 20px;
   z-index: 99;
@@ -100,4 +123,12 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .avatarContainer {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

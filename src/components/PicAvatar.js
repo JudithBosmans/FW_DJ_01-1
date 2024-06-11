@@ -7,6 +7,7 @@ import "../styles/PicAvatar.css";
 
 import { databases } from "../appwrite/config";
 import Logo from "../pics/Dr.Jart+_white_logo.png";
+import Button from "../pics/PicButton.png";
 
 const PicAvatar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -18,6 +19,7 @@ const PicAvatar = () => {
   const productData = JSON.parse(
     localStorage.getItem("currentProductData") || "{}"
   );
+  const [showElements, setShowElements] = useState(true);
 
   const scene = useRef(new THREE.Scene());
   const camera = useRef(
@@ -31,9 +33,7 @@ const PicAvatar = () => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-
     camera.position.set(2, 1, 5);
-
     const webGLRenderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
@@ -121,6 +121,18 @@ const PicAvatar = () => {
       .catch((error) => {
         console.error("Error capturing screenshot with html2canvas:", error);
       });
+
+    setShowElements(false);
+
+    html2canvas(document.body)
+      .then((canvas) => {
+        // Screenshot logic here...
+        setShowElements(true); // Optionally, show elements again after screenshot
+      })
+      .catch((error) => {
+        console.error("Error capturing screenshot with html2canvas:", error);
+        setShowElements(true); // Ensure elements are shown again if there's an error
+      });
   }
 
   const handleSubmitEmail = async () => {
@@ -175,17 +187,20 @@ const PicAvatar = () => {
       className="Container"
       style={{ backgroundImage: `url(${productData.picImage})` }}
     >
+      <h1 className="titlePic">Take a picture!</h1>
       <div className="logoStyle">
         <img src={Logo} className="logoPic"></img>
       </div>
-      <canvas ref={canvasRef} className="avatarContainer"></canvas>
+
       <button
         onClick={takeScreenshotAndSave}
         className="buttonPic"
         disabled={!isAvatarLoaded}
       >
-        Take a picture with your avatar!
+        <img src={Button}></img>
       </button>
+      <canvas ref={canvasRef} className="avatarContainer"></canvas>
+
       <AnimatePresence className="picContainer">
         {isModalOpen && (
           <motion.div

@@ -1,9 +1,26 @@
-body,
-html {
-  height: 100%;
-  overflow-y: scroll;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.Overview_container {
-  height: 100vh;
+.canvasContainer {
+  height: 100%;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+canvas {
+  width: 100vw;
+  height: 80vh;
+}
+
+.specificationPage {
+  overflow-x: hidden;
 }
