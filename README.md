@@ -1,6 +1,6 @@
 # FW_DJ_01-1 🎓
 
-This repository contains the project "FW_DJ_01-1" created by Judith Bosmans for her Bachelor's work at the Erasmus School of Brussels in Multimedia and Creative Technologies! 🌟
+Hi, I'm a third-year student! This repository contains the bachelor's work: "FW_DJ_01-1" for my Bachelor's work at the Erasmus School of Brussels in Multimedia and Creative Technologies! 🌟
 
 ## Description 🖥️
 
@@ -45,16 +45,13 @@ Experience the immersive 3D scene with parallax effects, interact with the avata
 
 An extensive list of sources used in the creation of my bachelor's work:
 
- ```bash
-    https://docs.google.com/document/d/1e6wkur11mOEkettSJGOmcYrx2_iGbmE8EXbDf18c0QM/edit?usp=sharing
-    ```
+- [https://docs.google.com/document/d/1e6wkur11mOEkettSJGOmcYrx2_iGbmE8EXbDf18c0QM/edit?usp=sharing)
 
 ## License 📄
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-
-
+`made by Judith Bosmans`
 
 
 
