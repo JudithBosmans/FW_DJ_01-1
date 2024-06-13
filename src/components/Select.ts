@@ -10,8 +10,16 @@ import cicaBackground from "../pics/cicaRef/cica_background.png";
 import ceraBackground from "../pics/ceraRef/ceraBackground.png";
 import cryoBackground from "../pics/cryoRef/cryoRef.png";
 
+import cicaProductImage from "../pics/cicaRef/cicaProductImage.png";
+import ceraProductImage from "../pics/ceraRef/ceraProductImage.png";
+import cryoProductImage from "../pics/cryoRef/cryoProductImage.png";
+
 const cicaModel = "/assets/hover/cicaHover.glb";
-const cryoModel = "/assets/hover/cicaHover.glb";
+const ceraModel = "/assets/hover/ceraHover.glb";
+
+const cicaIng = "/assets/hover/cicaIng.glb";
+const ceraIng = "/assets/hover/ceraIng.glb";
+const cryoIng = "/assets/hover/cryoIng.glb";
 
 export interface Ingredient {
   icon: string;
@@ -31,19 +39,20 @@ export const allProducts = [
     backgroundImage: jungleImage,
     picImage: cicaBackground,
 
-    productModel: cryoModel,
+    productModel: cicaModel,
+    productImage: cicaProductImage,
 
     buttonLink: "/Specification",
-    GameIngredient: "/assets/hover/cicaIng.glb",
-    GameIngredient2: "/assets/hover/ceraIng.glb",
-    GameIngredient3: "/assets/hover/cryoIng.glb",
+    GameIngredient1: cicaIng,
+    GameIngredient2: ceraIng,
+    GameIngredient3: cryoIng,
 
     Ing1: "This is the wrong ingredient",
     Ing2: "This is the right ingredient",
     Ing3: "This is the wrong ingredient 2",
 
-    Ing2Title: "Ceramides",
     Ing1Title: "Centella Asiatica",
+    Ing2Title: "Ceramides",
     Ing3Title: "Hyaluronic Acid",
   },
   {
@@ -56,12 +65,13 @@ export const allProducts = [
     backgroundImage: iceImage,
     picImage: ceraBackground,
 
-    productModel: cryoModel,
+    productModel: ceraModel,
+    productImage: ceraProductImage,
 
     buttonLink: "/Specification",
-    GameIngredient: "/assets/hover/cicaIng.glb",
-    GameIngredient2: "/assets/hover/ceraIng.glb",
-    GameIngredient3: "/assets/hover/cryoIng.glb",
+    GameIngredient1: cicaIng,
+    GameIngredient2: ceraIng,
+    GameIngredient3: cryoIng,
 
     Ing1: "This is the wrong ingredient",
     Ing2: "This is the right ingredient",
@@ -81,10 +91,13 @@ export const allProducts = [
     backgroundImage: snowImage,
     picImage: cryoBackground,
 
-    productModel: cryoModel,
+    productModel: ceraModel,
+    productImage: cryoProductImage,
 
     buttonLink: "/Specification",
-    GameIngredient: "/assets/hover/product1.glb",
+    GameIngredient1: cicaIng,
+    GameIngredient2: ceraIng,
+    GameIngredient3: cryoIng,
 
     Ing1: "This is the wrong ingredient",
     Ing2: "This is the right ingredient",

@@ -5,7 +5,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import html2canvas from "html2canvas";
 import "../styles/PicAvatar.css";
 
-import { databases } from "../appwrite/config";
 import Logo from "../pics/Dr.Jart+_white_logo.png";
 import Button from "../pics/PicButton.png";
 
@@ -15,7 +14,6 @@ const PicAvatar = () => {
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(false);
   const canvasRef = useRef(null);
   const [renderer, setRenderer] = useState(null);
-  const [emails2, setEmail] = useState("");
   const productData = JSON.parse(
     localStorage.getItem("currentProductData") || "{}"
   );
@@ -93,87 +91,40 @@ const PicAvatar = () => {
       console.error("Avatar not loaded yet!");
       return;
     }
-    const webGLCanvas = canvasRef.current;
-    const htmlCanvas = document.createElement("canvas");
-    htmlCanvas.width = window.innerWidth;
-    htmlCanvas.height = window.innerHeight;
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.render(scene.current, camera);
-
-    html2canvas(document.body)
-      .then((canvas) => {
-        const context = canvas.getContext("2d");
-
-        context.drawImage(webGLCanvas, 0, 0, canvas.width, canvas.height);
-
-        canvas.toBlob((blob) => {
-          if (!blob) {
-            console.error("Failed to create Blob from canvas.");
-            return;
-          }
-          const url = URL.createObjectURL(blob);
-          setImageSrc(url);
-          localStorage.setItem("avatarScreenshot", url);
-          setModalOpen(true);
-        }, "image/png");
-      })
-      .catch((error) => {
-        console.error("Error capturing screenshot with html2canvas:", error);
-      });
 
     setShowElements(false);
 
-    html2canvas(document.body)
-      .then((canvas) => {
-        setShowElements(true);
-      })
-      .catch((error) => {
-        console.error("Error capturing screenshot with html2canvas:", error);
-        setShowElements(true);
-      });
+    setTimeout(() => {
+      const webGLCanvas = canvasRef.current;
+
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.render(scene.current, camera);
+
+      html2canvas(document.body)
+        .then((canvas) => {
+          const context = canvas.getContext("2d");
+
+          context.drawImage(webGLCanvas, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              console.error("Failed to create Blob from canvas.");
+              return;
+            }
+            const url = URL.createObjectURL(blob);
+            setImageSrc(url);
+            localStorage.setItem("avatarScreenshot", url);
+            setModalOpen(true);
+          }, "image/png");
+        })
+        .catch((error) => {
+          console.error("Error capturing screenshot with html2canvas:", error);
+        })
+        .finally(() => {
+          setShowElements(true);
+        });
+    }, 3000);
   }
-
-  const handleSubmitEmail = async () => {
-    console.log("Environment Variables:", process.env);
-    console.log("Database ID:", process.env.REACT_APP_DATABASE_ID);
-    console.log("Collection ID:", process.env.REACT_APP_ID_COLLECTION);
-    if (!emails2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emails2)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    console.log(
-      "Submitting with Database ID:",
-      process.env.REACT_APP_DATABASE_ID
-    );
-    console.log(
-      "Submitting to Collection ID:",
-      process.env.REACT__APP_ID_COLLECTION
-    );
-    console.log("Document ID should be null for auto-generation:", null);
-    console.log("Data being sent:", { email2: emails2 });
-
-    try {
-      const result = await databases.createDocument(
-        process.env.REACT_APP_DATABASE_ID,
-        process.env.REACT_APP_ID_COLLECTION,
-        null,
-        { email2: emails2 },
-        ["*"],
-        ["*"]
-      );
-      console.log("Document created:", result);
-      alert("Email submitted successfully!");
-    } catch (error) {
-      console.error(
-        "Failed to submit email:",
-        error.message,
-        error.response.data
-      );
-      alert("Failed to submit email.");
-    }
-  };
 
   if (!productData || Object.keys(productData).length === 0) {
     return (
@@ -181,25 +132,39 @@ const PicAvatar = () => {
     );
   }
 
+  console.log(productData.productImage);
+
   return (
     <div
       className="Container"
       style={{ backgroundImage: `url(${productData.picImage})` }}
     >
-      <h1 className="titlePic">Take a picture!</h1>
       <div className="logoStyle">
-        <img src={Logo} className="logoPic"></img>
+        <img src={Logo} className="logoPic" alt="logo"></img>
       </div>
-
+      {/* <img
+        src={productData.productImage}
+        alt="productimage"
+        className="productImagePic"
+        style={{ width: "100%", height: "100%", objectFit: "contain" }}
+      /> */}
       <button
         onClick={takeScreenshotAndSave}
         className="buttonPic"
         disabled={!isAvatarLoaded}
+        style={{ display: showElements ? "block" : "none" }}
       >
-        <img src={Button}></img>
+        <img src={Button} alt="button"></img>
       </button>
-      <canvas ref={canvasRef} className="avatarContainer"></canvas>
-
+      <h1
+        className="titlePic"
+        style={{ display: showElements ? "block" : "none" }}
+      >
+        Take a picture!
+      </h1>
+      <div className="avatarBigContainer">
+        <canvas ref={canvasRef} className="avatarContainer"></canvas>
+      </div>
       <AnimatePresence className="picContainer">
         {isModalOpen && (
           <motion.div
@@ -216,7 +181,10 @@ const PicAvatar = () => {
               className="modalContent"
               onClick={(e) => e.stopPropagation()}
             >
-              <h1>Bye bye! Don't forget to share us on socials :)</h1>
+              <h1 className="byeMessage">
+                Bye bye! <br />
+                Don't forget to share us on socials 📸✨
+              </h1>
               <img src={imageSrc} alt="Screenshot" className="modalImage" />
               <button
                 className="downloadButton"
@@ -231,19 +199,6 @@ const PicAvatar = () => {
               >
                 DOWNLOAD
               </button>
-              <div className="emailInputContainer">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="emailInput"
-                  value={emails2}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button
-                  onClick={handleSubmitEmail}
-                  className="submitButton"
-                ></button>
-              </div>
             </motion.div>
           </motion.div>
         )}

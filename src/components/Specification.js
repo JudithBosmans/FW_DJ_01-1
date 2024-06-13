@@ -105,7 +105,6 @@ function Specification() {
     }
   }, [label]);
 
-  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],

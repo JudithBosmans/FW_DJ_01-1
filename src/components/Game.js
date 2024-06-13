@@ -26,6 +26,30 @@ const Game = () => {
   const startCollisionCheckRef = useRef(false);
   const group = new THREE.Group();
 
+  const objectConfig = {
+    ingredient1: {
+      model: "/assets/hover/cryoIng.glb",
+      title: "productData.Ing1Title",
+      scale: { x: 0.7, y: 0.7, z: 0.7 },
+      position: { x: 5, y: -4, z: -2 },
+      rotation: { y: Math.PI / -4 },
+    },
+    ingredient2: {
+      model: "/assets/hover/ceraIng.glb",
+      title: "productData.Ing2Title",
+      scale: { x: 0.7, y: 0.7, z: 0.7 },
+      position: { x: -4, y: -4, z: -2 },
+      rotation: { y: Math.PI / -4 },
+    },
+    ingredient3: {
+      model: "/assets/hover/cicaIng.glb",
+      title: "productData.Ing3Title",
+      scale: { x: 0.7, y: 0.7, z: 0.7 },
+      position: { x: 0, y: -4, z: -2 },
+      rotation: { y: Math.PI / -4 },
+    },
+  };
+
   useEffect(() => {
     const loader = new GLTFLoader();
     const scene = new THREE.Scene();
@@ -59,7 +83,11 @@ const Game = () => {
       canvas: canvasRef.current,
       alpha: true,
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(
+      canvasRef.current.offsetWidth,
+      canvasRef.current.offsetHeight
+    );
 
     /************
      * LABEL SETUP
@@ -90,20 +118,87 @@ const Game = () => {
      * LOAD OBJECTS
      ***********/
 
-    const loadObjects = () => {
-      loader.load(productData.productModel, (gltf) => {
-        object1 = gltf.scene;
-        object1.scale.set(0.1, 0.1, 0.1);
-        object1.position.set(0, -2, 0);
-        object1.rotation.y = Math.PI / 1;
-        group.add(object1);
-        scene.add(new THREE.AxesHelper(2));
-        console.log("Loaded object1:", object1);
-        objectsLoadedRef.current.object1 = true;
-        checkAllObjectsLoaded();
-      });
+    // const loadObjects = () => {
+    //   const userChoice = localStorage.getItem("chosenIngredient");
+    //   const chosenObject = objectConfig[userChoice];
 
-      loader.load(productData.GameIngredient, (gltf) => {
+    //   loader.load("/assets/hover/cicaHover.glb", (gltf) => {
+    //     object1 = gltf.scene;
+    //     object1.scale.set(0.1, 0.1, 0.1);
+    //     object1.position.set(0, -2, 0);
+    //     object1.rotation.y = Math.PI / 1;
+    //     group.add(object1);
+    //     console.log("Loaded object1:", object1);
+    //     objectsLoadedRef.current.object1 = true;
+    //     checkAllObjectsLoaded();
+    //   });
+
+    //   loader.load("/assets/hover/cryoIng.glb", (gltf) => {
+    //     object2 = gltf.scene;
+    //     object2.scale.set(0.7, 0.7, 0.7);
+    //     object2.position.set(5, -4, -2);
+    //     object2.rotation.y = Math.PI / -4;
+    //     group.add(object2);
+
+    //     const label2 = createTextSprite(productData.Ing1Title);
+    //     label2.position.set(0, 1.5, 0);
+    //     object2.add(label2);
+
+    //     console.log("Loaded object2:", object2);
+    //     objectsLoadedRef.current.object2 = true;
+    //     checkAllObjectsLoaded();
+    //   });
+
+    //   loader.load("/assets/hover/ceraIng.glb", (gltf) => {
+    //     object3 = gltf.scene;
+    //     object3.scale.set(0.7, 0.7, 0.7);
+    //     object3.position.set(-4, -4, -2);
+    //     object3.rotation.y = Math.PI / -4;
+    //     group.add(object3);
+
+    //     const label3 = createTextSprite(productData.Ing2Title);
+    //     label3.position.set(0, 1.5, 0);
+    //     object3.add(label3);
+
+    //     console.log("Loaded object3:", object3);
+    //     objectsLoadedRef.current.object3 = true;
+    //     checkAllObjectsLoaded();
+    //   });
+
+    //   loader.load("/assets/hover/cicaIng.glb", (gltf) => {
+    //     object4 = gltf.scene;
+    //     object4.scale.set(0.7, 0.7, 0.7);
+    //     object4.position.set(0, -4, -2);
+    //     object4.rotation.y = Math.PI / -4;
+    //     group.add(object4);
+
+    //     const label4 = createTextSprite(productData.Ing3Title);
+    //     label4.position.set(0, 1.5, 0);
+    //     object4.add(label4);
+
+    //     console.log("Loaded object4:", object4);
+    //     objectsLoadedRef.current.object4 = true;
+    //     checkAllObjectsLoaded();
+    //   });
+    // };
+
+    const loadObjects = () => {
+      loader.load(
+        // `${productData.productModel}`,
+        "/assets/hover/ceraHover2.glb",
+        (gltf) => {
+          object1 = gltf.scene;
+          object1.scale.set(0.1, 0.1, 0.1);
+          object1.position.set(0, -2, 0);
+          object1.rotation.y = Math.PI / 1;
+          group.add(object1);
+          console.log("Loaded object1:", object1);
+          objectsLoadedRef.current.object1 = true;
+          checkAllObjectsLoaded();
+        }
+      );
+
+      loader.load(`${productData.GameIngredient1}`, (gltf) => {
         object2 = gltf.scene;
         object2.scale.set(0.7, 0.7, 0.7);
         object2.position.set(5, -4, -2);
@@ -113,14 +208,13 @@ const Game = () => {
         const label2 = createTextSprite(productData.Ing1Title);
         label2.position.set(0, 1.5, 0);
         object2.add(label2);
-        object2.add(new THREE.AxesHelper(2));
 
         console.log("Loaded object2:", object2);
         objectsLoadedRef.current.object2 = true;
         checkAllObjectsLoaded();
       });
 
-      loader.load(productData.GameIngredient2, (gltf) => {
+      loader.load(`${productData.GameIngredient2}`, (gltf) => {
         object3 = gltf.scene;
         object3.scale.set(0.7, 0.7, 0.7);
         object3.position.set(-4, -4, -2);
@@ -130,14 +224,13 @@ const Game = () => {
         const label3 = createTextSprite(productData.Ing2Title);
         label3.position.set(0, 1.5, 0);
         object3.add(label3);
-        object3.add(new THREE.AxesHelper(2));
 
         console.log("Loaded object3:", object3);
         objectsLoadedRef.current.object3 = true;
         checkAllObjectsLoaded();
       });
 
-      loader.load(productData.GameIngredient3, (gltf) => {
+      loader.load(`${productData.GameIngredient3}`, (gltf) => {
         object4 = gltf.scene;
         object4.scale.set(0.7, 0.7, 0.7);
         object4.position.set(0, -4, -2);
@@ -147,7 +240,6 @@ const Game = () => {
         const label4 = createTextSprite(productData.Ing3Title);
         label4.position.set(0, 1.5, 0);
         object4.add(label4);
-        object4.add(new THREE.AxesHelper(2));
 
         console.log("Loaded object4:", object4);
         objectsLoadedRef.current.object4 = true;
@@ -275,7 +367,15 @@ const Game = () => {
       renderer.dispose();
       scene.clear();
     };
-  }, []);
+  }, [
+    group,
+    productData.Ing1,
+    productData.Ing1Title,
+    productData.Ing2,
+    productData.Ing2Title,
+    productData.Ing3,
+    productData.Ing3Title,
+  ]);
 
   if (!productData || Object.keys(productData).length === 0) {
     return (
