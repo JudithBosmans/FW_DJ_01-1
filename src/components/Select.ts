@@ -16,6 +16,7 @@ import cryoProductImage from "../pics/cryoRef/cryoProductImage.png";
 
 const cicaModel = "/assets/hover/cicaHover.glb";
 const ceraModel = "/assets/hover/ceraHover.glb";
+const cryoModel = "/assets/hover/cryoHover.glb";
 
 const cicaIng = "/assets/hover/cicaIng.glb";
 const ceraIng = "/assets/hover/ceraIng.glb";
@@ -44,67 +45,67 @@ export const allProducts = [
 
     buttonLink: "/Specification",
     GameIngredient1: cicaIng,
-    GameIngredient2: ceraIng,
-    GameIngredient3: cryoIng,
+    GameIngredient2: cryoIng,
+    GameIngredient3: ceraIng,
 
-    Ing1: "This is the wrong ingredient",
-    Ing2: "This is the right ingredient",
-    Ing3: "This is the wrong ingredient 2",
+    Ing1: "Close! Try again!",
+    Ing2: "Close! Try again!",
+    Ing3: "You succesfully completed the product, you can now take a picture with it!",
 
     Ing1Title: "Centella Asiatica",
-    Ing2Title: "Ceramides",
-    Ing3Title: "Hyaluronic Acid",
+    Ing2Title: "Hyaluronic Acid",
+    Ing3Title: "Ceramides",
   },
   {
     icon: "🧊",
+    label: "Cryo Rubber",
+    text: "Cryo Rubber™Moisturizing Mask",
+    productLink: "../pics/cryo/1.webp",
+
+    productShot: cryoProduct,
+    backgroundImage: iceImage,
+    picImage: cryoBackground,
+
+    productModel: cryoModel,
+    productImage: cryoProductImage,
+
+    buttonLink: "/Specification",
+    GameIngredient1: cryoIng,
+    GameIngredient2: cicaIng,
+    GameIngredient3: ceraIng,
+
+    Ing1: "Close! Try again!",
+    Ing2: "Close! Try again!",
+    Ing3: "You succesfully completed the product, you can now take a picture with it!",
+
+    Ing1Title: "Hyaluronic Acid",
+    Ing2Title: "Centella Asiatica",
+    Ing3Title: "Ceramides",
+  },
+  {
+    icon: "❄️",
     label: "Ceramidin",
     text: "Ceramidin™ Skin Barrier Moisturizing Cream",
     productLink: "../pics/cera/1.webp",
 
     productShot: ceraProduct,
-    backgroundImage: iceImage,
+    backgroundImage: snowImage,
     picImage: ceraBackground,
 
     productModel: ceraModel,
     productImage: ceraProductImage,
 
     buttonLink: "/Specification",
-    GameIngredient1: cicaIng,
-    GameIngredient2: ceraIng,
-    GameIngredient3: cryoIng,
+    GameIngredient1: ceraIng,
+    GameIngredient2: cryoIng,
+    GameIngredient3: cicaIng,
 
-    Ing1: "This is the wrong ingredient",
-    Ing2: "This is the right ingredient",
-    Ing3: "This is the wrong ingredient 2",
+    Ing1: "Close! Try again!",
+    Ing2: "Close! Try again!",
+    Ing3: "You succesfully completed the product, you can now take a picture with it!",
 
-    Ing1Title: "Centella Asiatica",
-    Ing2Title: "Ceramides",
-    Ing3Title: "Hyaluronic Acid",
-  },
-  {
-    icon: "❄️",
-    label: "Cryo Rubber",
-    text: "Cryo Rubber™Moisturizing Mask",
-    productLink: "../pics/cryo/1.webp",
-
-    productShot: cryoProduct,
-    backgroundImage: snowImage,
-    picImage: cryoBackground,
-
-    productModel: ceraModel,
-    productImage: cryoProductImage,
-
-    buttonLink: "/Specification",
-    GameIngredient1: cicaIng,
-    GameIngredient2: ceraIng,
-    GameIngredient3: cryoIng,
-
-    Ing1: "This is the wrong ingredient",
-    Ing2: "This is the right ingredient",
-    Ing3: "This is the wrong ingredient 2",
-
-    Ing2Title: "Ceramides",
-    Ing1Title: "Hyaluronic Acid",
+    Ing1Title: "Ceramides",
+    Ing2Title: "Hyaluronic Acid",
     Ing3Title: "Centella Asiatica",
   },
 ];

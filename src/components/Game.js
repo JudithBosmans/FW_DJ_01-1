@@ -26,30 +26,6 @@ const Game = () => {
   const startCollisionCheckRef = useRef(false);
   const group = new THREE.Group();
 
-  const objectConfig = {
-    ingredient1: {
-      model: "/assets/hover/cryoIng.glb",
-      title: "productData.Ing1Title",
-      scale: { x: 0.7, y: 0.7, z: 0.7 },
-      position: { x: 5, y: -4, z: -2 },
-      rotation: { y: Math.PI / -4 },
-    },
-    ingredient2: {
-      model: "/assets/hover/ceraIng.glb",
-      title: "productData.Ing2Title",
-      scale: { x: 0.7, y: 0.7, z: 0.7 },
-      position: { x: -4, y: -4, z: -2 },
-      rotation: { y: Math.PI / -4 },
-    },
-    ingredient3: {
-      model: "/assets/hover/cicaIng.glb",
-      title: "productData.Ing3Title",
-      scale: { x: 0.7, y: 0.7, z: 0.7 },
-      position: { x: 0, y: -4, z: -2 },
-      rotation: { y: Math.PI / -4 },
-    },
-  };
-
   useEffect(() => {
     const loader = new GLTFLoader();
     const scene = new THREE.Scene();
@@ -61,7 +37,6 @@ const Game = () => {
 
     let object1, object2, object3, object4;
     let camera;
-    // , renderer
     /************
      * SIZES
      ***********/
@@ -83,7 +58,7 @@ const Game = () => {
       canvas: canvasRef.current,
       alpha: true,
     });
-    // renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setSize(
       canvasRef.current.offsetWidth,
       canvasRef.current.offsetHeight
@@ -118,74 +93,10 @@ const Game = () => {
      * LOAD OBJECTS
      ***********/
 
-    // const loadObjects = () => {
-    //   const userChoice = localStorage.getItem("chosenIngredient");
-    //   const chosenObject = objectConfig[userChoice];
-
-    //   loader.load("/assets/hover/cicaHover.glb", (gltf) => {
-    //     object1 = gltf.scene;
-    //     object1.scale.set(0.1, 0.1, 0.1);
-    //     object1.position.set(0, -2, 0);
-    //     object1.rotation.y = Math.PI / 1;
-    //     group.add(object1);
-    //     console.log("Loaded object1:", object1);
-    //     objectsLoadedRef.current.object1 = true;
-    //     checkAllObjectsLoaded();
-    //   });
-
-    //   loader.load("/assets/hover/cryoIng.glb", (gltf) => {
-    //     object2 = gltf.scene;
-    //     object2.scale.set(0.7, 0.7, 0.7);
-    //     object2.position.set(5, -4, -2);
-    //     object2.rotation.y = Math.PI / -4;
-    //     group.add(object2);
-
-    //     const label2 = createTextSprite(productData.Ing1Title);
-    //     label2.position.set(0, 1.5, 0);
-    //     object2.add(label2);
-
-    //     console.log("Loaded object2:", object2);
-    //     objectsLoadedRef.current.object2 = true;
-    //     checkAllObjectsLoaded();
-    //   });
-
-    //   loader.load("/assets/hover/ceraIng.glb", (gltf) => {
-    //     object3 = gltf.scene;
-    //     object3.scale.set(0.7, 0.7, 0.7);
-    //     object3.position.set(-4, -4, -2);
-    //     object3.rotation.y = Math.PI / -4;
-    //     group.add(object3);
-
-    //     const label3 = createTextSprite(productData.Ing2Title);
-    //     label3.position.set(0, 1.5, 0);
-    //     object3.add(label3);
-
-    //     console.log("Loaded object3:", object3);
-    //     objectsLoadedRef.current.object3 = true;
-    //     checkAllObjectsLoaded();
-    //   });
-
-    //   loader.load("/assets/hover/cicaIng.glb", (gltf) => {
-    //     object4 = gltf.scene;
-    //     object4.scale.set(0.7, 0.7, 0.7);
-    //     object4.position.set(0, -4, -2);
-    //     object4.rotation.y = Math.PI / -4;
-    //     group.add(object4);
-
-    //     const label4 = createTextSprite(productData.Ing3Title);
-    //     label4.position.set(0, 1.5, 0);
-    //     object4.add(label4);
-
-    //     console.log("Loaded object4:", object4);
-    //     objectsLoadedRef.current.object4 = true;
-    //     checkAllObjectsLoaded();
-    //   });
-    // };
-
     const loadObjects = () => {
       loader.load(
-        // `${productData.productModel}`,
-        "/assets/hover/ceraHover2.glb",
+        // "/assets/hover/cicaHover.glb"
+        `${productData.productModel}`,
         (gltf) => {
           object1 = gltf.scene;
           object1.scale.set(0.1, 0.1, 0.1);
@@ -195,17 +106,21 @@ const Game = () => {
           console.log("Loaded object1:", object1);
           objectsLoadedRef.current.object1 = true;
           checkAllObjectsLoaded();
+        },
+        undefined,
+        (error) => {
+          console.error("Error loading object1:", error);
         }
       );
 
-      loader.load(`${productData.GameIngredient1}`, (gltf) => {
+      loader.load(`${productData.GameIngredient3}`, (gltf) => {
         object2 = gltf.scene;
         object2.scale.set(0.7, 0.7, 0.7);
         object2.position.set(5, -4, -2);
         object2.rotation.y = Math.PI / -4;
         group.add(object2);
 
-        const label2 = createTextSprite(productData.Ing1Title);
+        const label2 = createTextSprite(productData.Ing3Title);
         label2.position.set(0, 1.5, 0);
         object2.add(label2);
 
@@ -214,14 +129,14 @@ const Game = () => {
         checkAllObjectsLoaded();
       });
 
-      loader.load(`${productData.GameIngredient2}`, (gltf) => {
+      loader.load(`${productData.GameIngredient1}`, (gltf) => {
         object3 = gltf.scene;
         object3.scale.set(0.7, 0.7, 0.7);
         object3.position.set(-4, -4, -2);
         object3.rotation.y = Math.PI / -4;
         group.add(object3);
 
-        const label3 = createTextSprite(productData.Ing2Title);
+        const label3 = createTextSprite(productData.Ing1Title);
         label3.position.set(0, 1.5, 0);
         object3.add(label3);
 
@@ -230,14 +145,14 @@ const Game = () => {
         checkAllObjectsLoaded();
       });
 
-      loader.load(`${productData.GameIngredient3}`, (gltf) => {
+      loader.load(`${productData.GameIngredient2}`, (gltf) => {
         object4 = gltf.scene;
         object4.scale.set(0.7, 0.7, 0.7);
         object4.position.set(0, -4, -2);
         object4.rotation.y = Math.PI / -4;
         group.add(object4);
 
-        const label4 = createTextSprite(productData.Ing3Title);
+        const label4 = createTextSprite(productData.Ing2Title);
         label4.position.set(0, 1.5, 0);
         object4.add(label4);
 
@@ -262,58 +177,63 @@ const Game = () => {
      ***********/
     let collisionDetected = false;
 
-    const computeBoundingBox = (object) => {
-      if (!object) return null;
-      const box = new THREE.Box3().setFromObject(object);
-      return box;
-    };
+    // const computeBoundingBox = (object) => {
+    //   if (!object) return null;
+    //   const box = new THREE.Box3().setFromObject(object);
+    //   return box;
+    // };
 
     const checkCollision = () => {
       if (!startCollisionCheckRef.current) return;
 
-      const {
-        object1: loaded1,
-        object2: loaded2,
-        object3: loaded3,
-        object4: loaded4,
-      } = objectsLoadedRef.current;
-      if (!loaded1 || !loaded2 || !loaded3 || !loaded4) return;
+      const loadedObjects = [object1, object2, object3, object4].filter(
+        Boolean
+      );
+      loadedObjects.forEach((obj) => {
+        const box = new THREE.Box3().setFromObject(obj);
+        obj.userData.boundingBox = box;
+      });
 
-      const box1 = computeBoundingBox(object1);
-      const box2 = computeBoundingBox(object2);
-      const box3 = computeBoundingBox(object3);
-      const box4 = computeBoundingBox(object4);
-
-      if (!box1 || !box2 || !box3 || !box4) return;
-
-      if (box1.intersectsBox(box2)) {
-        handleCollision(object2);
-      } else if (box1.intersectsBox(box3)) {
-        handleCollision(object3);
-      } else if (box1.intersectsBox(box4)) {
-        handleCollision(object4);
+      for (let i = 0; i < loadedObjects.length; i++) {
+        for (let j = i + 1; j < loadedObjects.length; j++) {
+          if (
+            loadedObjects[i].userData.boundingBox.intersectsBox(
+              loadedObjects[j].userData.boundingBox
+            )
+          ) {
+            console.log(
+              `Collision detected between ${loadedObjects[i].name} and ${loadedObjects[j].name}`
+            );
+            handleCollision(loadedObjects[j]);
+          }
+        }
       }
     };
 
     const handleCollision = (collidingObject) => {
       if (!collisionDetected) {
         collisionDetected = true;
+        console.log(`Collision with: `, collidingObject.name);
         let message = "";
-        if (collidingObject === object2) {
-          message = productData.Ing1 || "Default message for Ingredient 1";
-        } else if (collidingObject === object3) {
-          message = productData.Ing2 || "Default message for Ingredient 2";
-        } else if (collidingObject === object4) {
-          message = productData.Ing3 || "Default message for Ingredient 3";
+        switch (collidingObject) {
+          case object2:
+            message = productData.Ing1 || "";
+            break;
+          case object3:
+            message = productData.Ing2 || "";
+            break;
+          case object4:
+            message = productData.Ing3 || "";
+            break;
+          default:
+            message = "Unknown collision";
+            break;
         }
+        console.log("Collision message:", message);
         setModalMessage(message);
         setModalVisible(true);
         setAvatarVisible(true);
       }
-    };
-
-    const setModalMessage = (message) => {
-      messageRef.current.innerHTML = message;
     };
 
     /************
@@ -331,25 +251,31 @@ const Game = () => {
     /************
      * DRAG CONTROLS
      ***********/
-    function initializeDragControls() {
-      if (!object2 || !object3 || !object4) return;
 
-      const draggableObjects = [object2, object3, object4];
+    function initializeDragControls() {
+      if (!renderer.domElement || !group.children.length) {
+        console.log(
+          "Initialization skipped: Renderer or group children not ready."
+        );
+        return;
+      }
+
+      const draggableObjects = group.children;
 
       const dragControls = new DragControls(
         draggableObjects,
         camera,
         renderer.domElement
       );
-
       dragControls.addEventListener("dragstart", function (event) {
-        console.log("Drag started", event.object);
+        console.log("Drag started on:", event.object);
       });
-
       dragControls.addEventListener("dragend", function (event) {
-        console.log("Drag ended", event.object);
+        console.log("Drag ended for:", event.object);
         checkCollision();
       });
+
+      console.log("Drag controls initialized.");
     }
 
     /************
@@ -401,6 +327,7 @@ const Game = () => {
       ></canvas>
       <div>
         <div ref={messageRef} id="message">
+          <p>{modalMessage}</p>
           {avatarVisible && <AvatarLoad />}
         </div>
       </div>

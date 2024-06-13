@@ -37,6 +37,13 @@ const App = () => {
     justifyContent: "center",
   };
 
+  useEffect(() => {
+    if (!localStorage.getItem("cleared")) {
+      localStorage.clear();
+      localStorage.setItem("cleared", "true");
+    }
+  }, []);
+
   return (
     <Parallax pages={2} className="parallax_container">
       {/************* 
