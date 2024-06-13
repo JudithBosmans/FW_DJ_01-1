@@ -126,12 +126,11 @@ const PicAvatar = () => {
 
     html2canvas(document.body)
       .then((canvas) => {
-        // Screenshot logic here...
-        setShowElements(true); // Optionally, show elements again after screenshot
+        setShowElements(true);
       })
       .catch((error) => {
         console.error("Error capturing screenshot with html2canvas:", error);
-        setShowElements(true); // Ensure elements are shown again if there's an error
+        setShowElements(true);
       });
   }
 

@@ -10,7 +10,8 @@ import cicaBackground from "../pics/cicaRef/cica_background.png";
 import ceraBackground from "../pics/ceraRef/ceraBackground.png";
 import cryoBackground from "../pics/cryoRef/cryoRef.png";
 
-const cicaImage = `${(process.env.PUBLIC, URL)}/assets/cica/image1.webp`;
+const cicaModel = "/assets/hover/cicaHover.glb";
+const cryoModel = "/assets/hover/cicaHover.glb";
 
 export interface Ingredient {
   icon: string;
@@ -24,42 +25,74 @@ export const allProducts = [
     icon: "🐯",
     label: "Cicapair",
     text: "Cicapair™ Tiger Grass Color Correcting Treatment",
-    productLink: cicaImage,
+
+    productLink: "../pics/cica/1.webp",
     productShot: cicaProduct,
     backgroundImage: jungleImage,
     picImage: cicaBackground,
+
+    productModel: cryoModel,
+
     buttonLink: "/Specification",
-    details: "Cicapair is a soothing treatment...",
-    products: ["Centella Asiatica", "Niacinamide", "Glycerin"],
-    usage: "Apply to clean skin, day and night.",
-    GameIngredient: "../pics/product1.glb",
+    GameIngredient: "/assets/hover/cicaIng.glb",
+    GameIngredient2: "/assets/hover/ceraIng.glb",
+    GameIngredient3: "/assets/hover/cryoIng.glb",
+
+    Ing1: "This is the wrong ingredient",
+    Ing2: "This is the right ingredient",
+    Ing3: "This is the wrong ingredient 2",
+
+    Ing2Title: "Ceramides",
+    Ing1Title: "Centella Asiatica",
+    Ing3Title: "Hyaluronic Acid",
   },
   {
     icon: "🧊",
     label: "Ceramidin",
     text: "Ceramidin™ Skin Barrier Moisturizing Cream",
-    productLink: "/assets/cera/",
+    productLink: "../pics/cera/1.webp",
+
     productShot: ceraProduct,
     backgroundImage: iceImage,
     picImage: ceraBackground,
+
+    productModel: cryoModel,
+
     buttonLink: "/Specification",
-    details: "Ceramidin is a moisture barrier strengthening cream...",
-    products: ["Ceramides", "Panthenol", "Shea Butter"],
-    usage: "Apply evenly to face and neck.",
-    GameIngredient: "../pics/product1.glb",
+    GameIngredient: "/assets/hover/cicaIng.glb",
+    GameIngredient2: "/assets/hover/ceraIng.glb",
+    GameIngredient3: "/assets/hover/cryoIng.glb",
+
+    Ing1: "This is the wrong ingredient",
+    Ing2: "This is the right ingredient",
+    Ing3: "This is the wrong ingredient 2",
+
+    Ing1Title: "Centella Asiatica",
+    Ing2Title: "Ceramides",
+    Ing3Title: "Hyaluronic Acid",
   },
   {
     icon: "❄️",
     label: "Cryo Rubber",
     text: "Cryo Rubber™Moisturizing Mask",
+    productLink: "../pics/cryo/1.webp",
+
     productShot: cryoProduct,
     backgroundImage: snowImage,
     picImage: cryoBackground,
+
+    productModel: cryoModel,
+
     buttonLink: "/Specification",
-    details: "Cryo Rubber is a cooling mask...",
-    products: ["Algae Extract", "Allantoin", "Collagen"],
-    usage: "Apply after cleansing, leave on for 15-20 minutes.",
-    GameIngredient: "../pics/product1.glb",
+    GameIngredient: "/assets/hover/product1.glb",
+
+    Ing1: "This is the wrong ingredient",
+    Ing2: "This is the right ingredient",
+    Ing3: "This is the wrong ingredient 2",
+
+    Ing2Title: "Ceramides",
+    Ing1Title: "Hyaluronic Acid",
+    Ing3Title: "Centella Asiatica",
   },
 ];
 

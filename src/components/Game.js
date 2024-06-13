@@ -1,14 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DragControls } from "three/examples/jsm/controls/DragControls.js";
-
 import "../styles/Game.css";
+
+import AvatarLoad from "./AvatarLoad";
 
 const Game = () => {
   const canvasRef = useRef();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const messageRef = useRef();
+  const [avatarVisible, setAvatarVisible] = useState(false);
   const productData = JSON.parse(
     localStorage.getItem("currentProductData") || "{}"
   );
@@ -57,8 +61,37 @@ const Game = () => {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
+    /************
+     * LABEL SETUP
+     ***********/
+
+    const createTextSprite = (message) => {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = 256;
+      canvas.height = 128;
+      context.fillStyle = "#000000";
+      context.font = "30px Helvetica";
+      context.textAlign = "center";
+      context.fillText(message, canvas.width / 2, canvas.height / 2);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+      const spriteMaterial = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+      });
+      const sprite = new THREE.Sprite(spriteMaterial);
+      sprite.scale.set(5, 2.5, 1);
+      return sprite;
+    };
+
+    /************
+     * LOAD OBJECTS
+     ***********/
+
     const loadObjects = () => {
-      loader.load("/assets/hover/cicapairHover2.glb", (gltf) => {
+      loader.load(productData.productModel, (gltf) => {
         object1 = gltf.scene;
         object1.scale.set(0.1, 0.1, 0.1);
         object1.position.set(0, -2, 0);
@@ -70,41 +103,52 @@ const Game = () => {
         checkAllObjectsLoaded();
       });
 
-      if (productData.GameAngredient) {
-        loader.load(productData.GameIngredient, (gltf) => {
-          object2 = gltf.scene;
-          object2.scale.set(0.7, 0.7, 0.7);
-          object2.position.set(5, -4, -2);
-          object2.rotation.y = Math.PI / -4;
-          group.add(object2);
-          object2.add(new THREE.AxesHelper(2));
-          console.log("Loaded object2:", object2);
-          objectsLoadedRef.current.object2 = true;
-          checkAllObjectsLoaded();
-        });
-      } else {
-        console.error("GameIngredient path is undefined!");
-      }
+      loader.load(productData.GameIngredient, (gltf) => {
+        object2 = gltf.scene;
+        object2.scale.set(0.7, 0.7, 0.7);
+        object2.position.set(5, -4, -2);
+        object2.rotation.y = Math.PI / -4;
+        group.add(object2);
 
-      loader.load("/assets/hover/product1.glb", (gltf) => {
+        const label2 = createTextSprite(productData.Ing1Title);
+        label2.position.set(0, 1.5, 0);
+        object2.add(label2);
+        object2.add(new THREE.AxesHelper(2));
+
+        console.log("Loaded object2:", object2);
+        objectsLoadedRef.current.object2 = true;
+        checkAllObjectsLoaded();
+      });
+
+      loader.load(productData.GameIngredient2, (gltf) => {
         object3 = gltf.scene;
         object3.scale.set(0.7, 0.7, 0.7);
-        object3.position.set(-5, -4, -2);
-        object3.rotation.y = Math.PI / 4;
+        object3.position.set(-4, -4, -2);
+        object3.rotation.y = Math.PI / -4;
         group.add(object3);
+
+        const label3 = createTextSprite(productData.Ing2Title);
+        label3.position.set(0, 1.5, 0);
+        object3.add(label3);
         object3.add(new THREE.AxesHelper(2));
+
         console.log("Loaded object3:", object3);
         objectsLoadedRef.current.object3 = true;
         checkAllObjectsLoaded();
       });
 
-      loader.load("/assets/hover/product1.glb", (gltf) => {
+      loader.load(productData.GameIngredient3, (gltf) => {
         object4 = gltf.scene;
         object4.scale.set(0.7, 0.7, 0.7);
         object4.position.set(0, -4, -2);
         object4.rotation.y = Math.PI / -4;
         group.add(object4);
+
+        const label4 = createTextSprite(productData.Ing3Title);
+        label4.position.set(0, 1.5, 0);
+        object4.add(label4);
         object4.add(new THREE.AxesHelper(2));
+
         console.log("Loaded object4:", object4);
         objectsLoadedRef.current.object4 = true;
         checkAllObjectsLoaded();
@@ -164,17 +208,19 @@ const Game = () => {
         collisionDetected = true;
         let message = "";
         if (collidingObject === object2) {
-          message = "Object 2 hit object 1!";
+          message = productData.Ing1 || "Default message for Ingredient 1";
         } else if (collidingObject === object3) {
-          message = "Object 3 hit object 1!";
+          message = productData.Ing2 || "Default message for Ingredient 2";
         } else if (collidingObject === object4) {
-          message = "Object 4 hit object 1!";
+          message = productData.Ing3 || "Default message for Ingredient 3";
         }
-        showMessage(message);
+        setModalMessage(message);
+        setModalVisible(true);
+        setAvatarVisible(true);
       }
     };
 
-    const showMessage = (message) => {
+    const setModalMessage = (message) => {
       messageRef.current.innerHTML = message;
     };
 
@@ -239,11 +285,11 @@ const Game = () => {
 
   return (
     <div className="game-container">
-      <h1>{productData.title}</h1>
-      <p>{productData.details}</p>
-      <Link to="/PicAvatar" className="buttonNext">
+      <h1>{productData.label}</h1>
+
+      {/* <Link to="/PicAvatar" className="buttonNext">
         PicAvatar
-      </Link>
+      </Link> */}
       <canvas
         ref={canvasRef}
         className="webgl"
@@ -253,7 +299,11 @@ const Game = () => {
           backgroundPosition: "center",
         }}
       ></canvas>
-      <div ref={messageRef} id="message" style={{ color: "pink" }}></div>
+      <div>
+        <div ref={messageRef} id="message">
+          {avatarVisible && <AvatarLoad />}
+        </div>
+      </div>
     </div>
   );
 };

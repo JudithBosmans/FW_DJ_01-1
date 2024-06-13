@@ -71,33 +71,47 @@ function Specification() {
   }, []);
 
   useEffect(() => {
-    const loadedImages = new Array(250);
+    const loadedImages = new Array(100);
     let imagesLoaded = 0;
 
     const handleImageLoad = (img, index) => {
       loadedImages[index] = img;
       imagesLoaded++;
-      if (imagesLoaded === 250) {
+      if (imagesLoaded === 100) {
         setImages(loadedImages);
         setLoading(false);
       }
     };
 
-    for (let i = 0; i < 250; i++) {
+    // Determine which product label to use
+    let productLabel;
+    if (label === "Cicapair") {
+      productLabel = "cica";
+    } else if (label === "Ceramidin") {
+      productLabel = "cera";
+    } else if (label === "Cryo Rubber") {
+      productLabel = "cryo";
+    } else {
+      // Default to Cicapair if label is not found
+      productLabel = "cica";
+    }
+
+    // Load images based on product label
+    for (let i = 0; i < 100; i++) {
       const img = new Image();
       img.onload = () => handleImageLoad(img, i);
       img.onerror = () => console.error(`Failed to load image ${i + 1}`);
-      img.src = `/assets/cica/${i + 1}.webp`;
-      // img.src = `{product.ProductLink}${i + 1}.webp`;
+      img.src = `/assets/${productLabel}/${i + 1}.webp`;
     }
-  }, []);
+  }, [label]);
 
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 249]);
+  const currentIndex = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   const render = useCallback(
     (index) => {
@@ -156,15 +170,12 @@ function Specification() {
         backgroundPosition: "center",
       }}
     >
-      <Link to="/Game" className="buttonNext">
-        Game
-      </Link>
-
-      <h1>{product.text}</h1>
-
       <div style={{ minHeight: "150vh" }} className="canvasContainer">
         <canvas ref={ref}> </canvas>
       </div>
+      <Link to="/Game" className="buttonNext">
+        Game
+      </Link>
     </div>
   );
 }
