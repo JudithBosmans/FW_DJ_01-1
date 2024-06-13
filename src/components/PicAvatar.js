@@ -142,12 +142,18 @@ const PicAvatar = () => {
       <div className="logoStyle">
         <img src={Logo} className="logoPic" alt="logo"></img>
       </div>
-      {/* <img
-        src={productData.productImage}
-        alt="productimage"
-        className="productImagePic"
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
-      /> */}
+
+      <div className="titleAvatarContainer">
+        <img
+          src={productData.productImage}
+          alt="productimage"
+          className="productImagePic"
+        />
+        <div className="avatarBigContainer">
+          <canvas ref={canvasRef} className="avatarContainer"></canvas>
+        </div>
+      </div>
+
       <button
         onClick={takeScreenshotAndSave}
         className="buttonPic"
@@ -162,9 +168,6 @@ const PicAvatar = () => {
       >
         Take a picture!
       </h1>
-      <div className="avatarBigContainer">
-        <canvas ref={canvasRef} className="avatarContainer"></canvas>
-      </div>
       <AnimatePresence className="picContainer">
         {isModalOpen && (
           <motion.div

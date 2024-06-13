@@ -4,4 +4,5 @@ body {
   font-family: Helvetica, Sans-Serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(circle, #fcd3e1 20%, #ffffff 80%);
 }

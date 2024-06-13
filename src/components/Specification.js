@@ -83,7 +83,6 @@ function Specification() {
       }
     };
 
-    // Determine which product label to use
     let productLabel;
     if (label === "Cicapair") {
       productLabel = "cica";
@@ -92,11 +91,9 @@ function Specification() {
     } else if (label === "Cryo Rubber") {
       productLabel = "cryo";
     } else {
-      // Default to Cicapair if label is not found
       productLabel = "cica";
     }
 
-    // Load images based on product label
     for (let i = 0; i < 100; i++) {
       const img = new Image();
       img.onload = () => handleImageLoad(img, i);
@@ -169,11 +166,15 @@ function Specification() {
         backgroundPosition: "center",
       }}
     >
+      <h1 className="titleSpecification">
+        Scroll for a suprise {product.icon}
+      </h1>
       <div style={{ minHeight: "150vh" }} className="canvasContainer">
         <canvas ref={ref}> </canvas>
       </div>
-      <Link to="/Game" className="buttonNext">
-        Game
+
+      <Link to="/Game" className="buttonNextSpec">
+        Pay the game!
       </Link>
     </div>
   );

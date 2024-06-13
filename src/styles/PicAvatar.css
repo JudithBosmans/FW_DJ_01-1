@@ -1,5 +1,16 @@
 .titlePic {
   color: white;
+  position: absolute;
+  top: 0;
+
+  color: rgb(47, 41, 46);
+  font-size: 60px;
+  padding-top: 30px;
+}
+
+.logoStyle {
+  position: absolute;
+  z-index: 999;
 }
 
 .buttonPic img {
@@ -45,12 +56,18 @@
   width: 30%;
 }
 
-.productImagePicContainer img {
-  width: 40%;
+.productImagePic {
+  width: 25%;
+  position: absolute;
+
+  top: 10vh;
+  left: 10vw;
+  transform: translate(30%, 0%);
 }
 
-.productImagePic img {
-  width: 30%;
+.titleAvatarContainer {
+  display: flex;
+  flex-direction: row;
 }
 
 .avatarBigContainer {
@@ -68,6 +85,10 @@
 
 .Avatar_button {
   z-index: 999;
+}
+
+.picContainer {
+  z-index: 9999;
 }
 
 .modalBackground {

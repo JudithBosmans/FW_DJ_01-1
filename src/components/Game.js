@@ -73,7 +73,7 @@ const Game = () => {
       const context = canvas.getContext("2d");
       canvas.width = 256;
       canvas.height = 128;
-      context.fillStyle = "#000000";
+      context.fillStyle = "#ffffff";
       context.font = "30px Helvetica";
       context.textAlign = "center";
       context.fillText(message, canvas.width / 2, canvas.height / 2);
@@ -95,7 +95,6 @@ const Game = () => {
 
     const loadObjects = () => {
       loader.load(
-        // "/assets/hover/cicaHover.glb"
         `${productData.productModel}`,
         (gltf) => {
           object1 = gltf.scene;
@@ -177,12 +176,6 @@ const Game = () => {
      ***********/
     let collisionDetected = false;
 
-    // const computeBoundingBox = (object) => {
-    //   if (!object) return null;
-    //   const box = new THREE.Box3().setFromObject(object);
-    //   return box;
-    // };
-
     const checkCollision = () => {
       if (!startCollisionCheckRef.current) return;
 
@@ -215,20 +208,15 @@ const Game = () => {
         collisionDetected = true;
         console.log(`Collision with: `, collidingObject.name);
         let message = "";
-        switch (collidingObject) {
-          case object2:
-            message = productData.Ing1 || "";
-            break;
-          case object3:
-            message = productData.Ing2 || "";
-            break;
-          case object4:
-            message = productData.Ing3 || "";
-            break;
-          default:
-            message = "Unknown collision";
-            break;
+        if (collidingObject === object3) {
+          message =
+            "You successfully completed the product, you can now take a picture with it!";
+        } else if (collidingObject === object2 || collidingObject === object4) {
+          message = "Close! Try again!";
+        } else {
+          message = "Unknown collision";
         }
+
         console.log("Collision message:", message);
         setModalMessage(message);
         setModalVisible(true);
@@ -295,11 +283,8 @@ const Game = () => {
     };
   }, [
     group,
-    productData.Ing1,
     productData.Ing1Title,
-    productData.Ing2,
     productData.Ing2Title,
-    productData.Ing3,
     productData.Ing3Title,
   ]);
 
@@ -311,11 +296,11 @@ const Game = () => {
 
   return (
     <div className="game-container">
-      <h1>{productData.label}</h1>
+      <h1 className="GameTile">
+        Drag the right ingredient to complete {productData.text}
+        {productData.icon}
+      </h1>
 
-      {/* <Link to="/PicAvatar" className="buttonNext">
-        PicAvatar
-      </Link> */}
       <canvas
         ref={canvasRef}
         className="webgl"
@@ -325,12 +310,15 @@ const Game = () => {
           backgroundPosition: "center",
         }}
       ></canvas>
-      <div>
-        <div ref={messageRef} id="message">
-          <p>{modalMessage}</p>
-          {avatarVisible && <AvatarLoad />}
-        </div>
+      <div ref={messageRef} id="message" className="popupContainer">
+        <p className="textPopup">{modalMessage}</p>
+        {avatarVisible && <AvatarLoad />}
       </div>
+      {avatarVisible && (
+        <Link to="/PicAvatar" className="buttonNext">
+          Take a picture!
+        </Link>
+      )}
     </div>
   );
 };

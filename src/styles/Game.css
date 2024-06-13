@@ -13,17 +13,28 @@ canvas.webgl {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .buttonNext {
   position: absolute;
-  z-index: 10;
+  z-index: 99999;
   background-color: #d21eb1;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
   color: #ffffff;
+  margin: 0% 0% 0% -28%;
+}
+
+.GameTile {
+  color: rgb(47, 41, 46);
+  font-size: 30px;
+  padding-top: 30px;
+}
+
+.textPopup {
+  z-index: 99999;
 }
 
 #message {
@@ -32,8 +43,13 @@ canvas.webgl {
   left: 0;
   top: 0;
   margin: 5% 40% 0% 0%;
+  z-index: 99999;
 }
 
-.insideContainerMessage {
-  color: black;
+.popupContainer {
+  z-index: 99999;
+}
+
+#message p {
+  z-index: 1001;
 }
