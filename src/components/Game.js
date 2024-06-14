@@ -54,15 +54,32 @@ const Game = () => {
     /************
      * CANVAS & RENDERER
      ***********/
+    // const renderer = new THREE.WebGLRenderer({
+    //   canvas: canvasRef.current,
+    //   alpha: true,
+    // });
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    // renderer.setSize(
+    //   canvasRef.current.offsetWidth,
+    //   canvasRef.current.offsetHeight
+    // );
+
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
       alpha: true,
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setSize(
-      canvasRef.current.offsetWidth,
-      canvasRef.current.offsetHeight
-    );
+
+    if (canvasRef.current) {
+      renderer.setSize(
+        canvasRef.current.offsetWidth,
+        canvasRef.current.offsetHeight
+      );
+    } else {
+      console.error(
+        "Renderer cannot be initialized: canvasRef.current is undefined."
+      );
+      return;
+    }
 
     /************
      * LABEL SETUP
