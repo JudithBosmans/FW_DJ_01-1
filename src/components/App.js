@@ -11,7 +11,7 @@ import "../styles/App.css";
 /////////////
 
 //GENERAL
-import logo from "../pics/Dr.Jart+_white_logo.png";
+import logo from "../pics/logo.png";
 
 //01 JUNGLE
 import Jungle_00 from "../pics/01/03_Background.png";

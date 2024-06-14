@@ -66,7 +66,7 @@ const PicAvatar = () => {
         }
       );
     } else {
-      console.error("No avatar URL found in localStorage.");
+      console.error("No avatar URL found in sessionStorage.");
     }
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1);
