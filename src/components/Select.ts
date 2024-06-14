@@ -1,4 +1,4 @@
-import jungleImage from "../pics/01/jungle.png";
+import jungleImage from "../pics/01/jungle2.png";
 import iceImage from "../pics/02/ice.png";
 import snowImage from "../pics/03/snow.png";
 

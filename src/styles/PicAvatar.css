@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
 
-  color: rgb(47, 41, 46);
+  color: rgb(255, 255, 255);
   font-size: 60px;
   padding-top: 30px;
 }
@@ -23,7 +23,7 @@
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 99;
+  z-index: 999;
   background: none;
   border: none;
   transition: opacity 0.3s ease;
@@ -157,5 +157,40 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 375px) {
+  .logoStyle {
+    position: absolute;
+    z-index: 999;
+    width: 170%;
+    margin-bottom: 40%;
+  }
+
+  .buttonPic img {
+    width: 80px;
+    text-decoration: none;
+    z-index: 9999;
+  }
+
+  .avatarContainer {
+    position: absolute;
+    z-index: 99;
+
+    top: 0vh;
+    left: 0vw;
+    transform: translate(-30%, -10%);
+  }
+
+  .productImagePic {
+    width: 50%;
+    position: absolute;
+
+    top: 45vh;
+    left: 0vw;
+    margin: 0% 0% 0% 0%;
+    transform: translate(0%, 0%);
+    z-index: 9999;
   }
 }

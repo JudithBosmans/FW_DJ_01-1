@@ -3,6 +3,12 @@ body {
   padding: 0;
 }
 
+.canvasContainer canvas {
+  width: 150%;
+  height: auto;
+  display: block;
+}
+
 .canvasContainer {
   height: 100%;
   overflow-y: scroll;

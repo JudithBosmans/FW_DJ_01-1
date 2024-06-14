@@ -149,19 +149,19 @@ const PicAvatar = () => {
           alt="productimage"
           className="productImagePic"
         />
+        <button
+          onClick={takeScreenshotAndSave}
+          className="buttonPic"
+          disabled={!isAvatarLoaded}
+          style={{ display: showElements ? "block" : "none" }}
+        >
+          <img src={Button} alt="button"></img>
+        </button>
         <div className="avatarBigContainer">
           <canvas ref={canvasRef} className="avatarContainer"></canvas>
         </div>
       </div>
 
-      <button
-        onClick={takeScreenshotAndSave}
-        className="buttonPic"
-        disabled={!isAvatarLoaded}
-        style={{ display: showElements ? "block" : "none" }}
-      >
-        <img src={Button} alt="button"></img>
-      </button>
       <h1
         className="titlePic"
         style={{ display: showElements ? "block" : "none" }}
