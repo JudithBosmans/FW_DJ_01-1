@@ -48,10 +48,6 @@ export const allProducts = [
     GameIngredient2: cryoIng,
     GameIngredient3: ceraIng,
 
-    // Ing1: "Close! Try again!",
-    // Ing2: "Close! Try again!",
-    // Ing3: "You succesfully completed the product, you can now take a picture with it!",
-
     Ing1Title: "Centella Asiatica",
     Ing2Title: "Hyaluronic Acid",
     Ing3Title: "Ceramides",
@@ -74,10 +70,6 @@ export const allProducts = [
     GameIngredient2: cicaIng,
     GameIngredient3: ceraIng,
 
-    // Ing1: "Close! Try again!",
-    // Ing2: "Close! Try again!",
-    // Ing3: "You succesfully completed the product, you can now take a picture with it!",
-
     Ing1Title: "Hyaluronic Acid",
     Ing2Title: "Centella Asiatica",
     Ing3Title: "Ceramides",
@@ -99,10 +91,6 @@ export const allProducts = [
     GameIngredient1: ceraIng,
     GameIngredient2: cryoIng,
     GameIngredient3: cicaIng,
-
-    // Ing1: "Close! Try again!",
-    // Ing2: "Close! Try again!",
-    // Ing3: "You succesfully completed the product, you can now take a picture with it!",
 
     Ing1Title: "Ceramides",
     Ing2Title: "Hyaluronic Acid",

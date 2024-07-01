@@ -10,10 +10,17 @@ canvas.webgl {
   display: block;
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
+}
+
+.popupContainer,
+.buttonNext,
+#message {
+  position: fixed;
+  z-index: 1000;
 }
 
 .buttonNext {
@@ -24,7 +31,7 @@ canvas.webgl {
   border-radius: 5px;
   text-decoration: none;
   color: #ffffff;
-  margin: 0% 0% 0% -28%;
+  margin: 15% 0% 0% -28%;
 }
 
 .GameTile {
@@ -38,11 +45,11 @@ canvas.webgl {
 }
 
 #message {
-  font-size: 40px;
+  font-size: 25px;
   color: black;
   left: 0;
   top: 0;
-  margin: 5% 40% 0% 0%;
+  margin: 10% 0% 0% 0%;
   z-index: 99999;
 }
 

@@ -30,7 +30,7 @@ MOBILE DEVICES - SMARTPHONES
 .logo-layer {
   z-index: 11;
   top: 0;
-  margin: -80% 0% 0% 0%;
+  margin: -60% 0% 0% 0%;
 }
 
 .logo-img {
@@ -50,7 +50,7 @@ MOBILE DEVICES - SMARTPHONES
 }
 
 .avatar_01 {
-  margin: 130% 0% 0% 25%;
+  margin: 90% 0% 0% 25%;
 }
 
 .Jungle_temple {
@@ -74,7 +74,7 @@ MOBILE DEVICES - SMARTPHONES
 }
 
 .avatar_02 {
-  margin: 120% 0% 0% -25%;
+  margin: 110% 0% 0% -25%;
 }
 
 .Ice_cubes_01 {
@@ -127,7 +127,7 @@ MOBILE DEVICES - SMARTPHONES
 *************/
 
 .Select_Container {
-  margin: 135% 0% 0% 0%;
+  margin: 165% 0% 0% 0%;
 }
 
 .app-background {
@@ -143,7 +143,7 @@ MOBILE DEVICES - SMARTPHONES
 
 .window {
   width: 90vw;
-  height: 70vh;
+  height: 80vh;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.8);
   overflow: hidden;

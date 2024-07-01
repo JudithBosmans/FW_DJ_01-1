@@ -115,6 +115,7 @@ const Game = () => {
         `${productData.productModel}`,
         (gltf) => {
           object1 = gltf.scene;
+          object1.name = "object1";
           object1.scale.set(0.1, 0.1, 0.1);
           object1.position.set(0, -2, 0);
           object1.rotation.y = Math.PI / 1;
@@ -131,6 +132,7 @@ const Game = () => {
 
       loader.load(`${productData.GameIngredient3}`, (gltf) => {
         object2 = gltf.scene;
+        object2.name = "object2";
         object2.scale.set(0.7, 0.7, 0.7);
         object2.position.set(5, -4, -2);
         object2.rotation.y = Math.PI / -4;
@@ -147,6 +149,7 @@ const Game = () => {
 
       loader.load(`${productData.GameIngredient1}`, (gltf) => {
         object3 = gltf.scene;
+        object3.name = "object3";
         object3.scale.set(0.7, 0.7, 0.7);
         object3.position.set(-4, -4, -2);
         object3.rotation.y = Math.PI / -4;
@@ -163,6 +166,7 @@ const Game = () => {
 
       loader.load(`${productData.GameIngredient2}`, (gltf) => {
         object4 = gltf.scene;
+        object4.name = "object4";
         object4.scale.set(0.7, 0.7, 0.7);
         object4.position.set(0, -4, -2);
         object4.rotation.y = Math.PI / -4;
@@ -214,24 +218,56 @@ const Game = () => {
             console.log(
               `Collision detected between ${loadedObjects[i].name} and ${loadedObjects[j].name}`
             );
-            handleCollision(loadedObjects[j]);
+            handleCollision(loadedObjects[i], loadedObjects[j]);
           }
         }
       }
     };
 
+    // const checkCollision = () => {
+    //   if (!startCollisionCheckRef.current) return;
+
+    //   const loadedObjects = [object1, object2, object3, object4].filter(
+    //     Boolean
+    //   );
+    //   loadedObjects.forEach((obj) => {
+    //     const box = new THREE.Box3().setFromObject(obj);
+    //     obj.userData.boundingBox = box;
+    //   });
+
+    //   for (let i = 0; i < loadedObjects.length; i++) {
+    //     for (let j = i + 1; j < loadedObjects.length; j++) {
+    //       if (
+    //         loadedObjects[i].userData.boundingBox.intersectsBox(
+    //           loadedObjects[j].userData.boundingBox
+    //         )
+    //       ) {
+    //         console.log(
+    //           `Collision detected between ${loadedObjects[i].name} and ${loadedObjects[j].name}`
+    //         );
+    //         handleCollision(loadedObjects[j]);
+    //       }
+    //     }
+    //   }
+    // };
+
     const handleCollision = (collidingObject) => {
       if (!collisionDetected) {
         collisionDetected = true;
         console.log(`Collision with: `, collidingObject.name);
-        let message = "";
-        if (collidingObject === object3) {
-          message =
-            "You successfully completed the product, you can now take a picture with it!";
-        } else if (collidingObject === object2 || collidingObject === object4) {
-          message = "Close! Try again!";
-        } else {
-          message = "Unknown collision";
+        let message = "Unknown collision";
+
+        switch (collidingObject.name) {
+          case "object3":
+            message =
+              "Good job completing the product! Want to take a picture with it?";
+            break;
+          case "object2":
+          case "object4":
+            message = "Close! Try again!";
+            break;
+          default:
+            message = "Close! Try again!";
         }
 
         console.log("Collision message:", message);
@@ -240,6 +276,27 @@ const Game = () => {
         setAvatarVisible(true);
       }
     };
+
+    // const handleCollision = (collidingObject) => {
+    //   if (!collisionDetected) {
+    //     collisionDetected = true;
+    //     console.log(`Collision with: `, collidingObject.name);
+    //     let message = "";
+    //     if (collidingObject === object3) {
+    //       message =
+    //         "You successfully completed the product, you can now take a picture with it!";
+    //     } else if (collidingObject === object2 || collidingObject === object4) {
+    //       message = "Close! Try again!";
+    //     } else {
+    //       message = "Unknown collision";
+    //     }
+
+    //     console.log("Collision message:", message);
+    //     setModalMessage(message);
+    //     setModalVisible(true);
+    //     setAvatarVisible(true);
+    //   }
+    // };
 
     /************
      * TICK

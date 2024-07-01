@@ -103,15 +103,19 @@ MOBILE DEVICES - SMARTPHONES
   margin: -270% 0% 0% 50%;
 }
 
+.Snow_button {
+  text-decoration: none;
+}
+
 .Snow_button p {
-  margin: 0% 0% 1000% 0%;
+  margin: 0% 0% 800% 0%;
   padding: 5px 10px 5px 10px;
 
-  background-color: white;
+  background-color: #d21eb1;
   border-radius: 5px;
 
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 /************* 

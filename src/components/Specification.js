@@ -174,7 +174,7 @@ function Specification() {
       </div>
 
       <Link to="/Game" className="buttonNextSpec">
-        Pay the game!
+        Play the game!
       </Link>
     </div>
   );

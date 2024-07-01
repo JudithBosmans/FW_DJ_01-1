@@ -50,7 +50,7 @@ const Overview = () => {
 
   return (
     <div>
-      <Parallax pages={2.3} className="parallax_container">
+      <Parallax pages={2.5} className="parallax_container">
         {/************* 
     ***************
       01 JUNGLE 
